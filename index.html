@@ -235,12 +235,20 @@
     margin-bottom: var(--s-7);
   }
   .hero-photo-block {
+    left: auto;
+    right: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    transform: none;
     width: min(460px, 64%);
     height: min(680px, calc(100svh - 126px));
     top: clamp(28px, 5.5vh, 58px);
   }
   .hero-compare {
-    left: calc(50% - 132px);
+    left: auto;
+    right: max(
+      calc(var(--gutter) + 90px),
+      calc((100vw - var(--container)) / 2 + var(--gutter) + 90px)
+    );
+    transform: none;
     bottom: clamp(28px, 6vh, 58px);
   }
 }
