@@ -1,0 +1,234 @@
+/* ============================================================
+   MORIAH CLINIC — Design System
+   Tokens · Tipografia · Base
+   Dra. Mayara Fernandes · "Deus + Luz"
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Libre+Caslon+Display&display=swap');
+
+:root{
+  /* ---- Cores da marca ---- */
+  --branco:        #F5F5EF;  /* Branco Estrutural — fundo de página */
+  --cream:         #FBFAF6;  /* Creme — superfícies elevadas / cards */
+  --bege:          #D8CFC4;  /* Bege Areia — blocos suaves, divisores */
+  --bege-50:       #E8E2D9;  /* Bege claro — fundos alternados */
+  --nude:          #C5B7A4;  /* Nude Arquitetônico — detalhe, linhas */
+  --nude-30:       #EAE3D9;
+  --marrom:        #7A5C4F;  /* Marrom Avelã — acento profundo, texto destaque */
+  --marrom-deep:   #4A3830;  /* Marrom escuro — seções escuras */
+  --espresso:      #2A2320;  /* Tinta — texto principal (quase preto quente) */
+  --espresso-90:   #3A322D;
+  --bronze:        #A98A52;  /* Bronze Fosco — reservado a acento/ação */
+  --bronze-deep:   #8E7140;
+  --bronze-light:  #C9A86A;
+
+  /* ---- Texto ---- */
+  --ink-1:   #2A2320;   /* títulos / corpo forte sobre claro */
+  --ink-2:   #5C5249;   /* corpo secundário */
+  --ink-3:   #8A7E72;   /* legendas / metadados */
+  --on-dark-1: #F3EEE6; /* texto sobre fundo escuro */
+  --on-dark-2: #C8BDB0;
+  --on-dark-3: #9A8E80;
+
+  /* ---- Gradientes / metálico ---- */
+  --bronze-metal: linear-gradient(135deg, #D8BC84 0%, #A98A52 38%, #8E7140 62%, #C9A86A 100%);
+  --nude-wash:    radial-gradient(120% 90% at 75% 15%, #E3DACE 0%, #D8CFC4 45%, #C9BCAB 100%);
+  --dark-wash:    radial-gradient(120% 100% at 70% 10%, #4A3830 0%, #322823 50%, #241C18 100%);
+
+  /* ---- Tipografia ---- */
+  --font-display: 'Libre Caslon Display', 'Times New Roman', serif;
+  --font-body:    'Jost', system-ui, sans-serif;
+
+  --fs-display:  clamp(3.4rem, 7vw, 6.2rem);
+  --fs-h1:       clamp(2.6rem, 5vw, 4.2rem);
+  --fs-h2:       clamp(2rem, 3.6vw, 3rem);
+  --fs-h3:       1.6rem;
+  --fs-h4:       1.25rem;
+  --fs-body:     1.0625rem;   /* 17px */
+  --fs-small:    0.9375rem;   /* 15px */
+  --fs-eyebrow:  0.75rem;     /* 12px */
+  --fs-caption:  0.8125rem;
+
+  --lh-display: 1.04;
+  --lh-head:    1.12;
+  --lh-body:    1.66;
+  --tracking-eyebrow: 0.26em;
+  --tracking-wide:    0.14em;
+
+  /* ---- Espaçamento (base 8) ---- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+  --s-9: 96px;  --s-10: 128px;
+  --container: 1180px;
+  --gutter: clamp(20px, 5vw, 64px);
+
+  /* ---- Raio ---- */
+  --r-sm: 4px;  --r-md: 10px;  --r-lg: 18px;  --r-xl: 28px;  --r-pill: 999px;
+
+  /* ---- Sombras (papel sobre papel) ---- */
+  --sh-sm:  0 1px 2px rgba(42,35,32,.06);
+  --sh-md:  0 14px 40px -16px rgba(42,35,32,.18);
+  --sh-lg:  0 30px 70px -24px rgba(42,35,32,.26);
+  --sh-line: inset 0 0 0 1px rgba(42,35,32,.07);
+  --hairline:        1px solid rgba(42,35,32,.10);
+  --hairline-soft:   1px solid rgba(42,35,32,.07);
+  --hairline-bronze: 1px solid rgba(169,138,82,.45);
+  --hairline-dark:   1px solid rgba(243,238,230,.14);
+
+  /* ---- Movimento ---- */
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --dur-fast: 200ms;
+  --dur: 360ms;
+  --dur-slow: 720ms;
+}
+
+/* ---- Reset / base ---- */
+*{ box-sizing: border-box; }
+html{ -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body{
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink-1);
+  background: var(--branco);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 400; margin: 0; color: var(--ink-1); }
+h1{ font-size: var(--fs-h1); line-height: var(--lh-head); letter-spacing: .005em; }
+h2{ font-size: var(--fs-h2); line-height: var(--lh-head); }
+h3{ font-size: var(--fs-h3); line-height: 1.2; }
+p{ margin: 0 0 1em; text-wrap: pretty; }
+a{ color: inherit; text-decoration: none; }
+
+::selection{ background: var(--nude); color: var(--espresso); }
+
+/* ---- Utilitárias tipográficas ---- */
+.eyebrow{
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--marrom);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.eyebrow::before{
+  content:""; width: 26px; height: 1px; background: var(--bronze); display:inline-block;
+}
+.display{ font-family: var(--font-display); font-size: var(--fs-display); line-height: var(--lh-display); font-weight: 300; }
+.serif-italic{ font-family: var(--font-display); font-style: italic; font-weight: 400; }
+.text-bronze{
+  background: var(--bronze-metal);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---- Textura de papel sutil (grão) ---- */
+.paper-grain{ position: relative; }
+.paper-grain::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+  opacity:.5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+
+/* container */
+.container{ max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+
+/* ============================================================
+   COMPONENTES
+   ============================================================ */
+
+/* ---- Botões ---- */
+.btn{
+  font-family: var(--font-body); font-size: var(--fs-small); font-weight: 500;
+  letter-spacing: .02em;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 30px; border-radius: var(--r-pill);
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+  text-align: center;
+}
+.btn svg{ width: 17px; height: 17px; flex: none; }
+.btn-primary{ background: var(--bronze-metal); color: var(--branco); box-shadow: var(--sh-md); }
+.btn-primary:hover{ transform: translateY(-2px); box-shadow: var(--sh-lg); }
+.btn-primary:active{ transform: translateY(0) scale(.99); box-shadow: var(--sh-sm); }
+.btn-solid{ background: var(--espresso); color: var(--on-dark-1); }
+.btn-solid:hover{ transform: translateY(-2px); box-shadow: var(--sh-md); }
+.btn-outline{ background: transparent; color: var(--ink-1); border-color: rgba(42,35,32,.30); }
+.btn-outline:hover{ background: var(--bege); border-color: var(--espresso); }
+.btn-ghost{ background: transparent; color: var(--marrom); padding-inline: 8px; }
+.btn-ghost:hover{ color: var(--bronze-deep); gap: 14px; }
+.btn-on-dark{ background: var(--bronze-metal); color: var(--espresso); }
+.btn-on-dark.btn-outline{ background: transparent; color: var(--on-dark-1); border-color: rgba(243,238,230,.30); }
+.btn-on-dark.btn-outline:hover{ background: rgba(243,238,230,.08); border-color: var(--on-dark-1); }
+
+/* ---- Tags / chips ---- */
+.tag{
+  font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: 500;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: var(--marrom); background: var(--nude-30);
+  padding: 7px 14px; border-radius: var(--r-pill); display: inline-flex; gap: 8px; align-items:center;
+}
+.tag-bronze{ color: var(--branco); background: var(--bronze-metal); }
+.tag-outline{ background: transparent; border: var(--hairline-bronze); color: var(--bronze-deep); }
+
+/* ---- Cards ---- */
+.card{
+  background: var(--cream); border: var(--hairline-soft); border-radius: var(--r-lg);
+  padding: var(--s-7); box-shadow: var(--sh-md);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover{ transform: translateY(-3px); box-shadow: var(--sh-lg); }
+.card-dark{
+  background: var(--dark-wash); color: var(--on-dark-1);
+  border: var(--hairline-dark); border-radius: var(--r-xl); padding: var(--s-7);
+  box-shadow: var(--sh-lg);
+}
+.card-dark h2, .card-dark h3{ color: var(--on-dark-1); }
+
+/* ---- Selos de confiança ---- */
+.seals{ display: flex; flex-wrap: wrap; gap: var(--s-6); align-items: center; }
+.seal{ display: flex; flex-direction: column; gap: 2px; }
+.seal b{ font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--marrom); line-height: 1; }
+.seal span{ font-size: var(--fs-caption); color: var(--ink-3); letter-spacing: .02em; }
+.seal + .seal{ padding-left: var(--s-6); border-left: var(--hairline); }
+
+/* ---- Input ---- */
+.field{ display: flex; flex-direction: column; gap: 8px; }
+.field label{ font-size: var(--fs-caption); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--ink-3); }
+.field input{
+  font-family: var(--font-body); font-size: var(--fs-body); color: var(--ink-1);
+  padding: 14px 18px; border-radius: var(--r-md);
+  border: 1px solid rgba(42,35,32,.16); background: var(--cream);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.field input::placeholder{ color: var(--ink-3); }
+.field input:focus{ outline: none; border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(169,138,82,.18); }
+
+/* ---- FAQ accordion ---- */
+.faq-item{ border-bottom: var(--hairline); }
+.faq-q{
+  width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+  font-family: var(--font-display); font-size: var(--fs-h4); color: var(--ink-1);
+  padding: var(--s-5) 0; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+}
+.faq-q .pm{ flex: none; width: 22px; height: 22px; position: relative; transition: transform var(--dur) var(--ease); }
+.faq-q .pm::before, .faq-q .pm::after{ content:""; position:absolute; background: var(--bronze); border-radius: 2px; }
+.faq-q .pm::before{ left: 0; right: 0; top: 10px; height: 2px; }
+.faq-q .pm::after{ top: 0; bottom: 0; left: 10px; width: 2px; transition: opacity var(--dur) var(--ease); }
+.faq-item.open .pm::after{ opacity: 0; }
+.faq-a{ overflow: hidden; max-height: 0; transition: max-height var(--dur) var(--ease); }
+.faq-a p{ color: var(--ink-2); padding-bottom: var(--s-5); margin: 0; max-width: 60ch; }
+
+/* ---- Linha de arcos (motivo divisor) ---- */
+.arch-rule{ display:block; width: 100%; height: 40px; color: var(--nude); }
+
+/* reveal */
+[data-reveal]{ opacity: 0; transform: translateY(14px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+[data-reveal].in{ opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){ [data-reveal]{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }

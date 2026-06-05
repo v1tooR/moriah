@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moriah Clinic — Design System</title>
+<link rel="stylesheet" href="moriah-ds.css">
+<style>
+  /* ---------- Página ---------- */
+  body{ overflow-x: hidden; }
+  .wrap{ max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+
+  /* nav */
+  .topnav{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,245,239,.86); backdrop-filter: blur(14px);
+    border-bottom: var(--hairline-soft);
+  }
+  .topnav .row{ max-width: var(--container); margin: 0 auto; padding: 14px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .topnav .brand{ display: flex; align-items: center; gap: 12px; }
+  .topnav .brand .brandlogo{ height: 30px; width: auto; color: var(--espresso); display:block; }
+  /* full real logo helper */
+  .fulllogo{ display:block; width: 100%; height: auto; color: var(--espresso); }
+  .topnav nav{ display: flex; gap: 4px; flex-wrap: wrap; }
+  .topnav nav a{ font-size: var(--fs-caption); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); padding: 8px 12px; border-radius: var(--r-pill); transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease); }
+  .topnav nav a:hover{ color: var(--ink-1); }
+  .topnav nav a.active{ color: var(--marrom); background: var(--nude-30); }
+  @media (max-width: 860px){ .topnav nav{ display:none; } }
+
+  section{ position: relative; }
+  .sec{ padding-block: var(--s-10); }
+  .sec-head{ max-width: 720px; margin-bottom: var(--s-8); }
+  .sec-head .eyebrow{ margin-bottom: var(--s-4); }
+  .sec-head h2{ margin-bottom: var(--s-4); }
+  .sec-head p{ color: var(--ink-2); font-size: 1.125rem; }
+  .sec-num{ font-family: var(--font-body); font-size: var(--fs-caption); letter-spacing: .2em;
+    color: var(--bronze-deep); display:block; margin-bottom: 10px; }
+
+  .grid{ display: grid; gap: var(--s-5); }
+  .g-2{ grid-template-columns: repeat(2,1fr); }
+  .g-3{ grid-template-columns: repeat(3,1fr); }
+  .g-4{ grid-template-columns: repeat(4,1fr); }
+  @media (max-width: 900px){ .g-3,.g-4{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 620px){ .g-2,.g-3,.g-4{ grid-template-columns: 1fr; } }
+
+  .spec-label{ font-size: var(--fs-caption); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .mono{ font-variant-numeric: tabular-nums; }
+
+  /* ---------- COVER ---------- */
+  .cover{ min-height: 100svh; display: grid; place-items: center; text-align: center;
+    background: var(--nude-wash); overflow: hidden; }
+  .cover .inner{ position: relative; z-index: 2; padding-block: var(--s-7); }
+  .cover .bigmark{ width: 92px; height: 120px; color: var(--espresso); margin: 0 auto var(--s-5); display:block; }
+  .cover h1{ font-size: var(--fs-display); font-weight: 300; letter-spacing: .14em; margin: 0; }
+  .cover .clinic{ font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem,3vw,2.2rem);
+    color: var(--marrom); letter-spacing: .04em; margin-top: -.1em; }
+  .cover .sub{ max-width: 520px; margin: var(--s-5) auto 0; color: var(--ink-2); font-size: 1.0625rem; }
+  .cover .meta{ margin-top: var(--s-6); display:inline-flex; gap: 14px; align-items:center;
+    font-size: var(--fs-caption); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+  .cover .meta i{ width:4px; height:4px; border-radius:50%; background: var(--bronze); display:inline-block; }
+  .cover .meta span{ white-space: nowrap; }
+  .cover .ghost-arch{ position: absolute; inset: 0; z-index: 1; display:grid; place-items:center; opacity:.13; }
+  .cover .ghost-arch svg{ width: min(78vw, 760px); color: rgba(255,253,248,.95); }
+
+  /* pilares */
+  .pillars{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--s-5); }
+  .pillar{ padding: var(--s-6); border-left: var(--hairline-bronze); }
+  .pillar .n{ font-family: var(--font-display); font-style:italic; color: var(--bronze-deep); font-size: 1.1rem; }
+  .pillar h3{ margin: 10px 0 8px; font-size: 1.6rem; }
+  .pillar p{ color: var(--ink-2); font-size: var(--fs-small); margin: 0; }
+
+  /* nome / story */
+  .story{ background: var(--bege-50); border-radius: var(--r-xl); padding: var(--s-9) var(--s-8);
+    text-align:center; position: relative; overflow:hidden; }
+  .story .qmark{ font-family: var(--font-display); font-size: 12rem; line-height:.7; color: var(--nude);
+    position:absolute; top: 6px; left: 30px; opacity:.5; }
+  .story blockquote{ font-family: var(--font-display); font-weight:300; font-style: italic;
+    font-size: clamp(1.6rem,3.2vw,2.6rem); line-height: 1.25; color: var(--ink-1); max-width: 760px; margin: 0 auto; }
+  .story cite{ display:block; margin-top: var(--s-5); font-style: normal; font-family: var(--font-body);
+    font-size: var(--fs-caption); letter-spacing: .16em; text-transform: uppercase; color: var(--marrom); }
+
+  /* ---------- LOGO ---------- */
+  .logo-stage{ background: var(--cream); border: var(--hairline-soft); border-radius: var(--r-lg);
+    display: grid; place-items: center; padding: var(--s-9); box-shadow: var(--sh-md); }
+  .lockup{ display:flex; align-items:center; gap: 22px; }
+  .lockup .mark{ color: var(--espresso); }
+  .lockup .wordmark{ display:flex; flex-direction: column; line-height: .92; }
+  .lockup .wordmark .m{ font-family: var(--font-display); font-weight: 400; letter-spacing: .2em; color: var(--ink-1); }
+  .lockup .wordmark .c{ font-family: var(--font-display); font-style: italic; color: var(--marrom); align-self: flex-end; }
+  /* sizes */
+  .lk-lg .mark{ width: 92px; height: 120px; }
+  .lk-lg .m{ font-size: 4.2rem; }
+  .lk-lg .c{ font-size: 1.8rem; padding-right: .12em; }
+  .lk-sm .mark{ width: 40px; height: 52px; }
+  .lk-sm .m{ font-size: 1.8rem; }
+  .lk-sm .c{ font-size: .85rem; }
+  .lockup-v{ flex-direction: column; gap: 14px; text-align:center; }
+  .lockup-v .wordmark{ align-items:center; }
+  .lockup-v .c{ align-self:center; }
+
+  .swatch-bg-espresso{ background: var(--espresso); }
+  .swatch-bg-nude{ background: var(--nude); }
+  .swatch-bg-bronze{ background: var(--marrom-deep); }
+  .logo-variant{ border-radius: var(--r-lg); padding: var(--s-7); display:grid; place-items:center; min-height: 180px; border: var(--hairline-soft); }
+  .logo-variant .cap{ position:absolute; bottom: 12px; left: 16px; font-size: var(--fs-caption); letter-spacing:.1em; text-transform:uppercase; }
+
+  .rules{ display:grid; gap: var(--s-3); }
+  .rule{ display:flex; gap: 12px; align-items:flex-start; font-size: var(--fs-small); color: var(--ink-2); }
+  .rule .ic{ flex:none; width: 20px; height:20px; border-radius:50%; display:grid; place-items:center; font-size: 12px; margin-top:1px; }
+  .rule.do .ic{ background: rgba(122,92,79,.14); color: var(--marrom); }
+  .rule.dont .ic{ background: rgba(170,80,60,.12); color: #9c5240; }
+
+  /* ---------- CORES ---------- */
+  .palette{ display:grid; grid-template-columns: repeat(4,1fr); gap: var(--s-4); }
+  @media(max-width:900px){ .palette{ grid-template-columns: repeat(2,1fr);} }
+  @media(max-width:540px){ .palette{ grid-template-columns: 1fr;} }
+  .sw{ border-radius: var(--r-md); overflow:hidden; border: var(--hairline-soft); cursor:pointer;
+    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); background: var(--cream); }
+  .sw:hover{ transform: translateY(-3px); box-shadow: var(--sh-md); }
+  .sw .chip{ height: 130px; }
+  .sw .meta{ padding: 14px 16px; }
+  .sw .name{ font-family: var(--font-display); font-size: 1.2rem; color: var(--ink-1); }
+  .sw .hex{ font-size: var(--fs-caption); letter-spacing: .08em; color: var(--ink-3); display:flex; justify-content:space-between; margin-top: 4px; }
+  .sw .role{ font-size: var(--fs-caption); color: var(--ink-3); margin-top: 8px; }
+  .sw .copied{ color: var(--marrom); }
+
+  /* ---------- TIPOGRAFIA ---------- */
+  .type-row{ display:grid; grid-template-columns: 130px 1fr; gap: var(--s-5); align-items: baseline;
+    padding: var(--s-5) 0; border-top: var(--hairline-soft); }
+  @media(max-width:620px){ .type-row{ grid-template-columns: 1fr; gap: 8px; } }
+  .type-row .info .spec-label{ display:block; }
+  .type-row .info .px{ font-size: var(--fs-caption); color: var(--ink-3); }
+  .type-row .sample{ color: var(--ink-1); }
+  .font-card{ padding: var(--s-7); }
+  .font-card .glyph{ font-family: var(--font-display); font-size: 5rem; line-height:1; color: var(--ink-1); }
+  .font-card .gly-jost{ font-family: var(--font-body); }
+  .font-card .set{ font-size: var(--fs-small); color: var(--ink-3); letter-spacing: .04em; margin-top: var(--s-4); }
+  .font-card h3{ margin: var(--s-4) 0 4px; }
+
+  /* ---------- MOTIVOS / ÍCONES ---------- */
+  .motif-frame{ border: var(--hairline-bronze); border-radius: var(--r-xl); padding: var(--s-8);
+    position: relative; background: var(--cream); }
+  .icon-grid{ display:grid; grid-template-columns: repeat(6,1fr); gap: var(--s-4); }
+  @media(max-width:760px){ .icon-grid{ grid-template-columns: repeat(3,1fr);} }
+  .icon-cell{ aspect-ratio: 1; display:grid; place-items:center; border: var(--hairline-soft);
+    border-radius: var(--r-md); background: var(--cream); color: var(--marrom); }
+  .icon-cell svg{ width: 38px; height: 38px; }
+  .photo-note{ display:grid; grid-template-columns: 1.1fr 1fr; gap: var(--s-6); align-items:center; }
+  @media(max-width:760px){ .photo-note{ grid-template-columns: 1fr; } }
+  .photo-demo{ aspect-ratio: 4/5; border-radius: var(--r-lg); overflow:hidden; position:relative;
+    background: linear-gradient(150deg,#caa877,#9a7b52 60%,#6d543f); box-shadow: var(--sh-md); }
+  .photo-demo .aura{ position:absolute; inset:0;
+    background: radial-gradient(60% 50% at 70% 25%, rgba(255,228,170,.55), transparent 70%); }
+  .photo-demo .lbl{ position:absolute; left:0; right:0; bottom:0; padding: 16px;
+    color: rgba(255,250,240,.92); font-size: var(--fs-caption); letter-spacing: .14em; text-transform: uppercase;
+    background: linear-gradient(transparent, rgba(40,30,22,.5)); }
+
+  /* ---------- COMPONENTES showcase ---------- */
+  .comp-block{ padding: var(--s-7); }
+  .comp-block h4{ font-family: var(--font-body); font-weight: 500; font-size: var(--fs-caption);
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 var(--s-5); }
+  .comp-row{ display:flex; gap: var(--s-4); flex-wrap: wrap; align-items:center; }
+
+  /* ---------- APLICAÇÃO (landing) ---------- */
+  .app-label{ display:inline-flex; align-items:center; gap:10px; font-size: var(--fs-caption);
+    letter-spacing:.18em; text-transform:uppercase; color: var(--bronze-deep); margin-bottom: var(--s-4); }
+  .frame{ border: var(--hairline); border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--sh-lg); margin-bottom: var(--s-8); background: var(--branco); }
+
+  .hero{ background: var(--nude-wash); padding: var(--s-9) var(--s-8); position:relative; overflow:hidden; }
+  .hero .ghost{ position:absolute; right: -60px; top: -40px; width: 460px; color: rgba(255,255,255,.4); }
+  .hero .inner{ position:relative; z-index:2; max-width: 660px; }
+  .hero h1{ font-size: clamp(2.6rem,5vw,4.4rem); font-weight: 300; line-height: 1.06; margin: var(--s-4) 0 var(--s-4); }
+  .hero h1 em{ font-style: italic; color: var(--marrom); }
+  .hero .sub{ font-size: 1.15rem; color: var(--ink-2); max-width: 520px; }
+  .hero .ctas{ display:flex; gap: var(--s-3); flex-wrap:wrap; margin: var(--s-6) 0 var(--s-7); }
+  .hero .float-badge{ position:absolute; right: var(--s-8); bottom: var(--s-8); z-index:3;
+    background: rgba(251,250,246,.7); backdrop-filter: blur(8px); border: var(--hairline-soft);
+    border-radius: var(--r-lg); padding: 18px 22px; max-width: 250px; box-shadow: var(--sh-md); }
+  .hero .float-badge p{ font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--ink-1); margin: 0 0 6px; }
+  .hero .float-badge span{ font-size: var(--fs-caption); letter-spacing:.12em; text-transform:uppercase; color: var(--marrom); }
+  @media(max-width:760px){ .hero .float-badge{ display:none; } }
+
+  .treat{ background: var(--branco); padding: var(--s-9) var(--s-8); }
+  .treat-feature{ display:grid; grid-template-columns: 1.15fr .85fr; gap: var(--s-7); align-items:center; }
+  @media(max-width:820px){ .treat-feature{ grid-template-columns:1fr; } }
+  .treat-feature .visual{ aspect-ratio: 5/6; border-radius: var(--r-lg); overflow:hidden; position:relative;
+    background: linear-gradient(150deg,#c8a77a,#8d6f4f 55%,#5f4a38); box-shadow: var(--sh-md); }
+  .treat-feature .visual .aura{ position:absolute; inset:0; background: radial-gradient(55% 45% at 65% 22%, rgba(255,230,175,.5), transparent 70%); }
+  .treat-feature .visual .qt{ position:absolute; inset: auto 20px 20px; color: rgba(255,250,240,.95);
+    font-family: var(--font-display); font-style:italic; font-size: 1.15rem; line-height:1.3; }
+  .bens{ list-style:none; padding:0; margin: var(--s-5) 0 0; display:grid; gap: 10px; }
+  .bens li{ display:flex; gap: 12px; align-items:flex-start; color: var(--ink-2); font-size: var(--fs-small); }
+  .bens li::before{ content:""; flex:none; width:16px; height:16px; margin-top:3px; border-radius:50%;
+    background: var(--bronze-metal); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat; }
+  .treat-mini{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--s-5); margin-top: var(--s-7); }
+  @media(max-width:820px){ .treat-mini{ grid-template-columns:1fr; } }
+
+  .cta-dark{ background: var(--dark-wash); color: var(--on-dark-1); padding: var(--s-10) var(--s-8);
+    text-align:center; position:relative; overflow:hidden; }
+  .cta-dark .ghost{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width: 520px; color: rgba(243,238,230,.06); }
+  .cta-dark .inner{ position:relative; z-index:2; max-width: 640px; margin: 0 auto; }
+  .cta-dark h2{ font-size: clamp(2.2rem,4vw,3.4rem); font-weight:300; margin: var(--s-4) 0; }
+  .cta-dark h2 em{ font-style:italic; color: var(--bronze-light); }
+  .cta-dark p{ color: var(--on-dark-2); font-size: 1.1rem; }
+  .cta-dark .eyebrow{ color: var(--bronze-light); }
+  .cta-dark .eyebrow::before{ background: var(--bronze-light); }
+  .cta-dark .note{ margin-top: var(--s-5); font-size: var(--fs-caption); letter-spacing:.14em; text-transform:uppercase; color: var(--on-dark-3); }
+
+  .foot{ background: var(--marrom-deep); color: var(--on-dark-1); padding: var(--s-9) var(--s-8) var(--s-6); }
+  .foot .top{ display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--s-6); }
+  @media(max-width:820px){ .foot .top{ grid-template-columns: 1fr 1fr; } }
+  .foot h4{ font-family: var(--font-body); font-weight:500; font-size: var(--fs-caption); letter-spacing:.16em; text-transform:uppercase; color: var(--on-dark-3); margin:0 0 var(--s-4); }
+  .foot ul{ list-style:none; padding:0; margin:0; display:grid; gap: 10px; }
+  .foot ul a{ color: var(--on-dark-2); font-size: var(--fs-small); transition: color var(--dur-fast); }
+  .foot ul a:hover{ color: var(--on-dark-1); }
+  .foot .brandcol .mark{ width: 34px; height: 44px; color: var(--bronze-light); }
+  .foot .tagline{ font-family: var(--font-display); font-style:italic; color: var(--on-dark-2); margin-top: var(--s-4); }
+  .foot .desc{ color: var(--on-dark-3); font-size: var(--fs-small); max-width: 30ch; margin-top: 8px; }
+  .foot .bottom{ margin-top: var(--s-8); padding-top: var(--s-5); border-top: var(--hairline-dark);
+    display:flex; justify-content:space-between; gap: 16px; flex-wrap:wrap; font-size: var(--fs-caption); color: var(--on-dark-3); letter-spacing:.08em; }
+
+  .footer-sys{ text-align:center; padding: var(--s-8) var(--gutter); color: var(--ink-3); font-size: var(--fs-caption); letter-spacing:.16em; text-transform:uppercase; }
+  .footer-sys .mark{ width: 22px; height:28px; color: var(--nude); display:inline-block; vertical-align:middle; margin-right:8px; }
+</style>
+</head>
+<body class="paper-grain">
+
+<!-- ===== SPRITE: logo Moriah (vetor real, traçado da arte original) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mk" viewBox="0 0 478.000000 792.000000"><g transform="translate(0.000000,792.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"><path d="M490 7467 c-29 -15 -53 -77 -44 -113 12 -46 44 -56 197 -65 191 -11 313 -25 492 -59 83 -16 166 -31 186 -34 20 -4 127 -36 239 -72 302 -97 468 -172 755 -337 99 -57 399 -261 465 -316 97 -82 295 -272 308 -298 16 -30 10 -41 -73 -128 -64 -67 -228 -297 -327 -455 -74 -120 -218 -382 -218 -397 0 -6 -7 -16 -15 -23 -18 -15 -20 -14 -141 94 -115 102 -198 157 -418 279 -231 128 -347 176 -586 246 -243 70 -391 91 -651 91 -165 0 -188 -2 -201 -17 -14 -16 -16 -309 -19 -2710 l-4 -2692 23 -23 c19 -19 33 -22 102 -23 74 0 82 2 107 28 l28 27 -4 2600 -4 2599 27 12 c28 13 125 5 306 -25 85 -14 115 -21 288 -70 167 -48 415 -158 570 -254 82 -52 283 -209 445 -348 34 -30 34 -44 -4 -152 -43 -122 -81 -252 -123 -427 -20 -82 -39 -159 -42 -170 -2 -11 -14 -74 -25 -140 -46 -272 -49 -391 -49 -2067 0 -1565 0 -1578 20 -1598 40 -40 183 -20 210 29 8 15 10 329 8 1123 -6 2167 -6 2128 38 2438 26 180 117 552 161 652 30 70 34 67 146 -99 165 -243 357 -689 408 -948 49 -247 49 -257 49 -1754 -1 -1226 1 -1406 14 -1426 27 -41 165 -45 201 -5 15 16 16 126 15 1341 0 728 -5 1391 -10 1473 -16 276 -77 575 -154 771 -147 370 -276 594 -503 873 -48 61 -52 80 -23 147 25 58 157 303 218 405 101 168 280 416 345 479 41 38 54 37 89 -11 14 -18 67 -91 120 -163 309 -422 592 -1130 663 -1660 8 -66 21 -163 27 -215 7 -65 12 -618 15 -1762 l4 -1667 26 -21 c43 -33 161 -20 183 20 16 29 7 3342 -8 3465 -16 122 -39 257 -69 400 -14 66 -27 131 -30 145 -3 14 -13 52 -23 85 -10 33 -28 94 -40 135 -39 135 -93 294 -116 345 -12 28 -41 95 -64 150 -51 124 -50 123 -131 270 -129 234 -245 413 -364 560 -59 71 -85 112 -85 130 0 21 30 56 133 159 136 136 239 224 362 306 39 25 132 89 209 141 206 140 234 158 314 196 60 28 231 91 325 120 15 5 17 19 17 119 l0 113 -77 -29 c-172 -64 -417 -177 -584 -268 -154 -83 -408 -258 -509 -349 -36 -32 -103 -91 -150 -130 -47 -39 -112 -99 -145 -132 -33 -34 -66 -61 -73 -61 -8 0 -64 48 -125 108 -166 160 -370 319 -615 481 -107 70 -476 255 -598 300 -453 164 -453 164 -574 190 -158 33 -285 50 -487 66 -233 18 -320 19 -353 2z"></path></g></symbol>
+  <symbol id="logo" viewBox="0 0 1272.000000 390.000000"><g transform="translate(0.000000,390.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"><path d="M207 3696 c-20 -21 -22 -49 -4 -64 7 -6 69 -16 137 -22 350 -30 600 -120 913 -328 100 -67 267 -214 267 -236 0 -7 -16 -28 -36 -47 -43 -41 -185 -252 -244 -364 -24 -44 -44 -82 -46 -84 -1 -1 -34 24 -73 56 -80 68 -251 168 -361 212 -155 62 -261 83 -420 85 l-145 1 0 -1360 0 -1360 50 -3 c38 -3 52 1 62 14 11 15 13 267 13 1314 l-1 1295 47 3 c99 7 313 -52 464 -128 67 -33 192 -123 288 -207 l33 -28 -30 -89 c-38 -109 -75 -263 -93 -376 -10 -65 -13 -284 -13 -940 l0 -855 26 -9 c18 -6 35 -4 55 5 l29 14 6 870 c6 926 4 897 59 1111 32 125 46 158 61 149 35 -22 134 -203 198 -362 77 -190 74 -158 80 -1013 l6 -765 47 -3 c40 -3 49 0 59 19 8 16 10 198 6 733 -4 601 -7 726 -21 806 -41 235 -128 432 -282 635 -30 40 -54 78 -54 85 0 46 215 398 286 470 l25 25 30 -35 c143 -169 284 -462 355 -740 46 -182 46 -190 51 -1112 4 -855 5 -878 24 -888 11 -7 31 -7 51 -2 l33 8 3 810 c1 490 -1 849 -8 911 -38 387 -197 793 -419 1068 -23 28 -41 56 -41 64 0 30 172 181 318 279 82 55 162 106 178 115 38 19 292 107 310 107 12 0 14 -246 14 -1671 0 -918 2 -1674 5 -1680 7 -11 75 -12 92 -1 10 6 13 361 15 1698 l3 1689 60 12 c33 7 89 14 125 15 l65 3 3 -1707 c2 -1689 2 -1707 22 -1718 22 -12 71 -3 82 14 4 6 8 794 8 1751 0 1341 -3 1744 -12 1753 -15 15 -84 15 -219 2 -215 -22 -406 -79 -629 -189 -176 -86 -324 -191 -488 -345 l-42 -40 -53 50 c-192 186 -422 328 -688 425 -194 71 -298 93 -509 105 -102 6 -118 5 -133 -10z"></path><path d="M6218 3280 c-141 -25 -249 -81 -349 -180 -144 -143 -213 -317 -226 -570 -10 -211 31 -406 114 -550 54 -93 172 -207 260 -253 225 -117 552 -108 746 21 243 160 364 452 336 809 -28 363 -201 612 -489 704 -73 23 -308 35 -392 19z m266 -35 c237 -62 373 -312 393 -725 18 -386 -103 -699 -311 -800 -140 -68 -305 -57 -435 28 -147 97 -238 311 -262 615 -32 404 89 742 303 850 93 47 209 59 312 32z"></path><path d="M3750 3242 c0 -32 -123 -1035 -136 -1102 -19 -107 -77 -332 -104 -402 -11 -29 -20 -54 -20 -55 0 -2 35 -3 78 -3 l77 0 1 223 c0 208 4 256 63 747 34 289 64 526 65 528 2 1 121 -335 266 -748 l263 -750 76 0 76 0 224 668 c123 367 227 670 230 674 3 4 46 -286 95 -645 48 -359 90 -662 93 -674 5 -22 9 -23 114 -23 93 0 109 2 109 16 0 9 -47 358 -105 775 -58 417 -105 764 -105 769 0 7 -29 10 -82 8 l-82 -3 -234 -693 c-130 -381 -239 -689 -243 -685 -6 6 -259 718 -476 1341 l-15 42 -114 0 c-63 0 -114 -4 -114 -8z"></path><path d="M7460 2465 l0 -785 110 0 110 0 0 289 0 289 42 37 c70 59 172 105 234 105 44 0 59 -5 84 -27 21 -19 89 -141 200 -358 l168 -330 111 -3 c61 -1 111 1 111 5 -1 4 -76 159 -168 343 -161 323 -169 336 -214 366 l-47 32 33 6 c62 12 152 65 205 121 195 206 154 530 -82 644 -99 48 -128 51 -524 51 l-373 0 0 -785z m692 717 c81 -39 148 -110 180 -190 19 -48 23 -76 23 -172 0 -108 -2 -119 -31 -180 -63 -133 -127 -176 -281 -189 -115 -11 -185 -34 -274 -94 -35 -24 -70 -46 -76 -51 -10 -6 -13 88 -13 454 l0 462 203 -4 202 -3 67 -33z"></path><path d="M8980 2465 l0 -785 115 0 115 0 0 785 0 785 -115 0 -115 0 0 -785z"></path><path d="M9837 2483 c-168 -422 -309 -776 -313 -786 -6 -16 2 -17 107 -15 l113 3 136 340 136 340 338 0 339 0 39 -100 c48 -122 100 -321 124 -472 l18 -113 63 0 c46 0 61 3 58 13 -3 6 -144 359 -314 782 l-310 770 -113 3 -114 3 -307 -768z m829 -55 c5 -17 -14 -18 -310 -18 -204 0 -316 4 -316 10 0 5 70 186 156 401 l157 391 154 -383 c84 -211 156 -392 159 -401z"></path><path d="M11310 2465 l0 -785 115 0 115 0 0 435 0 435 390 0 390 0 0 -435 0 -435 115 0 115 0 0 785 0 785 -115 0 -115 0 0 -330 0 -330 -390 0 -390 0 0 330 0 330 -115 0 -115 0 0 -785z"></path><path d="M7645 1428 c-48 -28 -59 -78 -25 -120 38 -49 118 -37 138 21 25 72 -48 136 -113 99z"></path><path d="M8929 1411 c-31 -32 -34 -45 -19 -86 29 -77 160 -50 160 33 0 32 -52 82 -85 82 -16 0 -38 -12 -56 -29z"></path><path d="M6639 1389 c-155 -22 -279 -95 -365 -211 -69 -95 -89 -168 -88 -328 0 -112 4 -145 22 -194 33 -88 63 -134 131 -199 134 -128 335 -173 586 -132 157 25 162 28 149 107 l-6 36 -90 -59 c-102 -67 -149 -83 -216 -74 -210 29 -368 172 -417 377 -19 81 -19 225 0 306 51 217 218 352 434 352 61 0 104 -18 208 -85 89 -59 93 -58 93 21 0 30 -3 32 -73 53 -122 36 -255 47 -368 30z"></path><path d="M7250 850 l0 -520 75 0 75 0 -2 518 -3 517 -72 3 -73 3 0 -521z"></path><path d="M8427 1189 c-108 -37 -196 -107 -276 -219 l-46 -65 -3 138 -3 137 -74 0 -75 0 0 -425 0 -425 75 0 75 0 0 263 0 262 31 55 c49 85 173 203 243 229 68 25 99 26 136 4 54 -31 55 -38 58 -440 l3 -373 74 0 75 0 0 348 c0 395 -4 427 -65 481 -61 53 -133 63 -228 30z"></path><path d="M9550 1200 c-115 -20 -215 -78 -277 -158 -93 -123 -98 -355 -10 -504 61 -105 202 -195 340 -218 98 -17 237 -8 311 20 l58 22 -6 46 c-3 25 -8 48 -11 50 -2 3 -19 -6 -37 -20 -170 -126 -337 -129 -457 -9 -81 81 -115 200 -109 376 6 145 27 210 94 284 88 98 228 118 368 53 37 -17 81 -41 97 -53 17 -12 33 -19 36 -15 3 3 9 24 13 46 7 39 6 42 -19 52 -82 32 -284 46 -391 28z"></path><path d="M7610 755 l0 -425 75 0 75 0 0 425 0 425 -75 0 -75 0 0 -425z"></path><path d="M8910 755 l0 -425 75 0 75 0 0 425 0 425 -75 0 -75 0 0 -425z"></path></g></symbol>
+  <symbol id="archrule" viewBox="0 0 1200 60" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+    <path d="M0 60 Q100 0 200 60 Q300 0 400 60 Q500 0 600 60 Q700 0 800 60 Q900 0 1000 60 Q1100 0 1200 60"/>
+    <path d="M100 60 Q200 6 300 60 Q400 6 500 60 Q600 6 700 60 Q800 6 900 60 Q1000 6 1100 60" opacity=".5"/>
+  </symbol>
+</svg>
+
+<!-- ===== NAV ===== -->
+<header class="topnav">
+  <div class="row">
+    <a class="brand" href="#cover">
+      <svg class="brandlogo" viewBox="0 0 1272 390"><use href="#logo"/></svg>
+    </a>
+    <nav id="nav">
+      <a href="#fundamentos">Fundamentos</a>
+      <a href="#logo">Logo</a>
+      <a href="#cores">Cores</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#motivos">Motivos</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#aplicacao">Aplicação</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== COVER ===== -->
+<section id="cover" class="cover paper-grain">
+  <div class="ghost-arch" aria-hidden="true">
+    <svg viewBox="0 0 478.000000 792.000000"><use href="#mk"/></svg>
+  </div>
+  <div class="inner wrap">
+    <svg class="bigmark" viewBox="0 0 478.000000 792.000000"><use href="#mk"/></svg>
+    <div class="eyebrow" style="justify-content:center">Design System</div>
+    <h1>MORIAH</h1>
+    <div class="clinic">Clinic</div>
+    <p class="sub">O sistema visual da clínica de estética avançada da Dra. Mayara Fernandes — arquitetura, luz e naturalidade traduzidas em cor, forma e tipografia.</p>
+    <div class="meta"><span>Deus + Luz</span><i></i><span>Versão 1.0</span><i></i><span>2025</span></div>
+  </div>
+</section>
+
+<!-- ===== FUNDAMENTOS ===== -->
+<section id="fundamentos" class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">01 — A Essência</span>
+      <div class="eyebrow">Fundamentos da marca</div>
+      <h2>Técnica, propósito e um olhar que respeita quem você é.</h2>
+      <p>A Moriah nasce do reposicionamento da antiga <em>MF Beauty Center</em> — um amadurecimento que traduz excelência e propósito. O nome significa <strong>Deus&nbsp;+&nbsp;Luz</strong>, e o símbolo evoca arcos que se elevam: arquitetura, ascensão e a beleza que se sustenta com naturalidade.</p>
+    </div>
+
+    <div class="pillars" data-reveal>
+      <div class="pillar"><div class="n">i.</div><h3>Técnica</h3><p>Protocolos autorais e tecnologia de última geração, aplicados com precisão e estudo contínuo.</p></div>
+      <div class="pillar"><div class="n">ii.</div><h3>Acolhimento</h3><p>Avaliação individual e escuta honesta. Cada plano é desenhado para uma pessoa — nunca genérico.</p></div>
+      <div class="pillar"><div class="n">iii.</div><h3>Propósito</h3><p>Reposicionar, não transformar. Que percebam a melhora, e não o procedimento.</p></div>
+    </div>
+
+    <div style="margin-top: var(--s-9)" data-reveal>
+      <div class="story paper-grain">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Mais do que reduzir medidas ou suavizar linhas — o meu trabalho é devolver a você a sensação de se reconhecer novamente no espelho.</blockquote>
+        <cite>Dra. Mayara Fernandes · Fundadora da Moriah</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><svg class="arch-rule" viewBox="0 0 1200 60" preserveAspectRatio="none"><use href="#archrule"/></svg></div>
+
+<!-- ===== LOGO ===== -->
+<section id="logo" class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">02 — Marca</span>
+      <div class="eyebrow">Logotipo &amp; símbolo</div>
+      <h2>Arcos que se entrelaçam e se elevam.</h2>
+      <p>O símbolo é um monograma “M” construído por arcos sobrepostos — referência à arquitetura sacra do Monte Moriah. As curvas à esquerda trazem o humano e o orgânico; os pilares retos à direita, a estrutura e a confiança.</p>
+    </div>
+
+    <div class="logo-stage paper-grain" data-reveal>
+      <svg class="fulllogo" viewBox="0 0 1272 390" style="max-width:560px"><use href="#logo"/></svg>
+    </div>
+
+    <div class="grid g-3" style="margin-top: var(--s-5)" data-reveal>
+      <div class="card" style="display:grid;place-items:center;min-height:210px;position:relative">
+        <svg viewBox="0 0 478 792" style="width:auto;height:118px;color:var(--espresso)"><use href="#mk"/></svg>
+        <div class="spec-label" style="position:absolute;bottom:14px">Símbolo isolado</div>
+      </div>
+      <div class="card" style="display:grid;place-items:center;min-height:210px;position:relative;background:var(--bege)">
+        <svg viewBox="0 0 1272 390" style="width:100%;max-width:300px;height:auto;color:var(--marrom)"><use href="#logo"/></svg>
+        <div class="spec-label" style="position:absolute;bottom:14px">Logo · monocromático marrom</div>
+      </div>
+      <div class="card" style="display:grid;place-items:center;min-height:210px;position:relative">
+        <svg viewBox="0 0 478 792" style="width:auto;height:64px;color:var(--espresso)"><use href="#mk"/></svg>
+        <div class="spec-label" style="position:absolute;bottom:14px">Assinatura compacta · favicon</div>
+      </div>
+    </div>
+
+    <!-- versões em cor (logo real) -->
+    <div class="grid g-4" style="margin-top: var(--s-5)" data-reveal>
+      <div class="logo-variant swatch-bg-espresso" style="position:relative">
+        <svg viewBox="0 0 1272 390" style="width:100%;height:auto;color:var(--branco)"><use href="#logo"/></svg>
+        <span class="cap" style="color:var(--on-dark-3)">Branco / fundo escuro</span>
+      </div>
+      <div class="logo-variant swatch-bg-bronze" style="position:relative">
+        <svg viewBox="0 0 1272 390" style="width:100%;height:auto;color:var(--bronze-light)"><use href="#logo"/></svg>
+        <span class="cap" style="color:var(--on-dark-3)">Bronze / marrom</span>
+      </div>
+      <div class="logo-variant swatch-bg-nude" style="position:relative">
+        <svg viewBox="0 0 1272 390" style="width:100%;height:auto;color:var(--espresso)"><use href="#logo"/></svg>
+        <span class="cap" style="color:var(--marrom-deep)">Espresso / nude</span>
+      </div>
+      <div class="logo-variant" style="position:relative;background:var(--branco)">
+        <svg viewBox="0 0 1272 390" style="width:100%;height:auto;color:var(--nude)"><use href="#logo"/></svg>
+        <span class="cap" style="color:var(--ink-3)">Nude / claro</span>
+      </div>
+    </div>
+
+    <!-- regras -->
+    <div class="grid g-2" style="margin-top: var(--s-7)" data-reveal>
+      <div class="comp-block card">
+        <h4>Boas práticas</h4>
+        <div class="rules">
+          <div class="rule do"><span class="ic">✓</span><span>Preserve a área de respiro mínima equivalente à largura de dois arcos do símbolo.</span></div>
+          <div class="rule do"><span class="ic">✓</span><span>Use o símbolo isolado em espaços pequenos (favicon, selo, redes).</span></div>
+          <div class="rule do"><span class="ic">✓</span><span>Aplique o bronze apenas em superfícies escuras ou neutras, para manter o brilho metálico.</span></div>
+        </div>
+      </div>
+      <div class="comp-block card">
+        <h4>Evite</h4>
+        <div class="rules">
+          <div class="rule dont"><span class="ic">✕</span><span>Distorcer, inclinar ou alterar o espaçamento entre símbolo e wordmark.</span></div>
+          <div class="rule dont"><span class="ic">✕</span><span>Aplicar a marca sobre fundos de baixo contraste ou imagens agitadas.</span></div>
+          <div class="rule dont"><span class="ic">✕</span><span>Recolorir com tons fora da paleta ou adicionar sombras/contornos.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CORES ===== -->
+<section id="cores" class="sec" style="background:var(--bege-50)">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">03 — Paleta</span>
+      <div class="eyebrow">Cores da marca</div>
+      <h2>Neutros arquitetônicos, bronze para a ação.</h2>
+      <p>Uma paleta quente e nude que evoca concreto polido, areia e luz de fim de tarde. O bronze é reservado: aparece apenas em ações, detalhes metálicos e acentos — nunca como plano de fundo dominante.</p>
+    </div>
+
+    <div class="palette" data-reveal>
+      <div class="sw" data-hex="#F5F5EF"><div class="chip" style="background:#F5F5EF"></div><div class="meta"><div class="name">Branco Estrutural</div><div class="hex"><span>#F5F5EF</span><span class="cp">copiar</span></div><div class="role">Fundo de página</div></div></div>
+      <div class="sw" data-hex="#D8CFC4"><div class="chip" style="background:#D8CFC4"></div><div class="meta"><div class="name">Bege Areia</div><div class="hex"><span>#D8CFC4</span><span class="cp">copiar</span></div><div class="role">Blocos suaves, divisores</div></div></div>
+      <div class="sw" data-hex="#C5B7A4"><div class="chip" style="background:#C5B7A4"></div><div class="meta"><div class="name">Nude Arquitetônico</div><div class="hex"><span>#C5B7A4</span><span class="cp">copiar</span></div><div class="role">Detalhe, linhas, símbolo</div></div></div>
+      <div class="sw" data-hex="#7A5C4F"><div class="chip" style="background:#7A5C4F"></div><div class="meta"><div class="name">Marrom Avelã</div><div class="hex" style="color:rgba(255,255,255,.6)"><span style="color:#caa">#7A5C4F</span><span class="cp">copiar</span></div><div class="role">Acento profundo, texto destaque</div></div></div>
+      <div class="sw" data-hex="#A98A52"><div class="chip" style="background:var(--bronze-metal)"></div><div class="meta"><div class="name">Bronze Fosco</div><div class="hex"><span>#A98A52</span><span class="cp">copiar</span></div><div class="role">Reservado à ação</div></div></div>
+      <div class="sw" data-hex="#2A2320"><div class="chip" style="background:#2A2320"></div><div class="meta"><div class="name">Tinta Espresso</div><div class="hex"><span>#2A2320</span><span class="cp">copiar</span></div><div class="role">Texto principal</div></div></div>
+      <div class="sw" data-hex="#4A3830"><div class="chip" style="background:#4A3830"></div><div class="meta"><div class="name">Marrom Profundo</div><div class="hex"><span>#4A3830</span><span class="cp">copiar</span></div><div class="role">Seções escuras, rodapé</div></div></div>
+      <div class="sw" data-hex="#FBFAF6"><div class="chip" style="background:#FBFAF6;box-shadow:var(--sh-line)"></div><div class="meta"><div class="name">Creme</div><div class="hex"><span>#FBFAF6</span><span class="cp">copiar</span></div><div class="role">Superfícies / cards</div></div></div>
+    </div>
+
+    <div class="grid g-3" style="margin-top: var(--s-6)" data-reveal>
+      <div class="card"><h4 style="font-family:var(--font-body);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:var(--fs-caption);color:var(--ink-3);margin:0 0 12px">Regra dos 6%</h4><p style="margin:0;color:var(--ink-2);font-size:var(--fs-small)">O bronze e o amarelo metálico nunca cobrem mais que ~6% de uma tela. Ação chama atenção justamente por ser rara.</p></div>
+      <div class="card"><h4 style="font-family:var(--font-body);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:var(--fs-caption);color:var(--ink-3);margin:0 0 12px">Contraste</h4><p style="margin:0;color:var(--ink-2);font-size:var(--fs-small)">Texto sempre em Tinta Espresso sobre claro, ou Creme sobre marrom. Nude e bege são para superfícies, não para texto.</p></div>
+      <div class="card"><h4 style="font-family:var(--font-body);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:var(--fs-caption);color:var(--ink-3);margin:0 0 12px">Gradientes</h4><p style="margin:0;color:var(--ink-2);font-size:var(--fs-small)">Apenas marrom→marrom (profundidade) ou o brilho metálico do bronze. Nunca arco-íris ou degradês saturados.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIPOGRAFIA ===== -->
+<section id="tipografia" class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">04 — Tipografia</span>
+      <div class="eyebrow">Sistema tipográfico</div>
+      <h2>Uma serifada editorial, uma sans arquitetônica.</h2>
+      <p>O contraste entre a <em>Libre Caslon Display</em> (display, expressiva e humana) e a <em>Jost</em> (geométrica, limpa, ecoando os arcos retos do símbolo) cria a voz visual da Moriah: sofisticada sem ser fria.</p>
+    </div>
+
+    <div class="grid g-2" data-reveal>
+      <div class="card font-card">
+        <div class="glyph">Aa</div>
+        <h3>Libre Caslon Display</h3>
+        <div class="spec-label">Display · títulos · citações</div>
+        <div class="set">Pesos 300 · 400 · 500 · itálico<br>ABCDEFGHIJKLM abcdefghijklm 1234567890</div>
+      </div>
+      <div class="card font-card">
+        <div class="glyph gly-jost">Aa</div>
+        <h3>Jost</h3>
+        <div class="spec-label">Corpo · interface · eyebrows</div>
+        <div class="set">Pesos 300 · 400 · 500 · 600<br>ABCDEFGHIJKLM abcdefghijklm 1234567890</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: var(--s-5); padding: var(--s-7)" data-reveal>
+      <div class="type-row"><div class="info"><span class="spec-label">Display</span><span class="px">Libre Caslon Display · clamp 54–99px</span></div><div class="sample" style="font-family:var(--font-display);font-weight:300;font-size:clamp(2.6rem,5vw,4.6rem);line-height:1.04">Você merece se reconhecer no espelho.</div></div>
+      <div class="type-row"><div class="info"><span class="spec-label">Heading 2</span><span class="px">Libre Caslon Display · 32–48px</span></div><div class="sample" style="font-family:var(--font-display);font-size:var(--fs-h2);line-height:1.12">Cada tratamento é único. Como você.</div></div>
+      <div class="type-row"><div class="info"><span class="spec-label">Eyebrow</span><span class="px">Jost 500 · 12px · +0.26em</span></div><div class="sample"><span class="eyebrow">Protocolos &amp; Tratamentos</span></div></div>
+      <div class="type-row"><div class="info"><span class="spec-label">Corpo</span><span class="px">Jost 400 · 17px · 1.66</span></div><div class="sample" style="font-size:var(--fs-body);color:var(--ink-2);max-width:54ch">Na Moriah, nenhum protocolo é genérico. Cada plano é desenhado depois de uma avaliação detalhada, combinando as melhores tecnologias para o seu objetivo específico.</div></div>
+      <div class="type-row"><div class="info"><span class="spec-label">Citação</span><span class="px">Libre Caslon Display</span></div><div class="sample serif-italic" style="font-size:1.5rem;color:var(--marrom)">Resultados que respeitam sua essência.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOTIVOS / ICONOGRAFIA ===== -->
+<section id="motivos" class="sec" style="background:var(--bege-50)">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">05 — Motivos</span>
+      <div class="eyebrow">Iconografia &amp; elementos gráficos</div>
+      <h2>O arco como assinatura.</h2>
+      <p>A linguagem gráfica deriva diretamente do símbolo: arcos finos como molduras e divisores, ícones em linha de traço único, textura de papel sutil e fotografia com aura dourada e quente.</p>
+    </div>
+
+    <div class="motif-frame paper-grain" data-reveal>
+      <div class="spec-label" style="margin-bottom:16px">Arco como divisor / moldura</div>
+      <svg class="arch-rule" viewBox="0 0 1200 60" preserveAspectRatio="none" style="color:var(--nude);height:54px"><use href="#archrule"/></svg>
+    </div>
+
+    <div style="margin-top: var(--s-6)" data-reveal>
+      <div class="spec-label" style="margin-bottom:16px">Ícones em linha · traço 1.5 · cantos arejados</div>
+      <div class="icon-grid">
+        <div class="icon-cell" title="Harmonização facial">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c8 0 13 6 13 16 0 9-5 20-13 20S11 31 11 22C11 12 16 6 24 6Z"/><path d="M18 22c1.4-1.4 3.6-1.4 5 0M25 22c1.4-1.4 3.6-1.4 5 0"/><path d="M24 28v4M21 36c2 1.5 4 1.5 6 0"/></svg>
+        </div>
+        <div class="icon-cell" title="Contorno corporal">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/><path d="M16 22c0-3 3-5 8-5s8 2 8 5c0 5-3 7-3 11 0 3 2 5 2 9M14 22c0 5 3 7 3 11 0 3-2 5-2 9"/></svg>
+        </div>
+        <div class="icon-cell" title="Preenchimento / detalhe">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7c5 7 11 12 11 19a11 11 0 0 1-22 0c0-7 6-12 11-19Z"/><path d="M19 28a5 5 0 0 0 5 5"/></svg>
+        </div>
+        <div class="icon-cell" title="Naturalidade / brilho">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12Z"/></svg>
+        </div>
+        <div class="icon-cell" title="Avaliação individual">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="21" r="12"/><path d="M30 30l8 8"/></svg>
+        </div>
+        <div class="icon-cell" title="Arco / estrutura">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V24a12 12 0 0 1 24 0v16"/><path d="M19 40V25a5 5 0 0 1 10 0v15"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: var(--s-6); padding: var(--s-7)" data-reveal>
+      <div class="photo-note">
+        <div>
+          <div class="spec-label" style="margin-bottom:12px">Direção de fotografia</div>
+          <h3 style="margin-bottom:12px">Luz quente, pele real, fundo neutro.</h3>
+          <p style="color:var(--ink-2);font-size:var(--fs-small);margin:0">Luz de janela ao fim da tarde, leve calor dourado, textura natural da pele — nunca super-retocada. Fundos em creme, areia e madeira. Recortes em retrato 4:5 ou editorial 3:4. Evite ambientes frios, azulados ou clínicos.</p>
+        </div>
+        <div class="photo-demo">
+          <div class="aura"></div>
+          <div class="lbl">Aura dourada · retrato 4:5 · pele natural</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPONENTES ===== -->
+<section id="componentes" class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">06 — Componentes</span>
+      <div class="eyebrow">Biblioteca de interface</div>
+      <h2>Paper sobre paper, ação em bronze.</h2>
+      <p>Componentes calmos e editoriais. Cantos generosos para superfícies importantes, sombras discretas como papel empilhado, e uma única ação em destaque por tela.</p>
+    </div>
+
+    <div class="grid g-2" data-reveal>
+      <div class="card comp-block">
+        <h4>Botões</h4>
+        <div class="comp-row">
+          <button class="btn btn-primary">Quero minha avaliação <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="btn btn-outline">Conhecer tratamentos</button>
+        </div>
+        <div class="comp-row" style="margin-top:16px">
+          <button class="btn btn-solid">Falar no WhatsApp</button>
+          <button class="btn btn-ghost">Leia o artigo →</button>
+        </div>
+      </div>
+      <div class="card comp-block">
+        <h4>Tags &amp; selos</h4>
+        <div class="comp-row">
+          <span class="tag">Tratamento Facial</span>
+          <span class="tag-bronze tag">Protocolo Autoral</span>
+          <span class="tag tag-outline">Moriah Signature</span>
+        </div>
+        <div class="comp-row" style="margin-top:22px">
+          <div class="seals">
+            <div class="seal"><b>7+</b><span>Anos de experiência</span></div>
+            <div class="seal"><b>2</b><span>Protocolos autorais</span></div>
+            <div class="seal"><b>100%</b><span>Personalizado</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g-2" style="margin-top: var(--s-5)" data-reveal>
+      <div class="card comp-block">
+        <h4>Campo de formulário</h4>
+        <div class="field"><label>Nome</label><input type="text" placeholder="Como podemos te chamar?"></div>
+        <div class="field" style="margin-top:16px"><label>WhatsApp</label><input type="text" placeholder="(00) 00000-0000"></div>
+      </div>
+      <div class="card-dark comp-block" style="padding:var(--s-7)">
+        <h4 style="color:var(--on-dark-3)">Card premium · escuro</h4>
+        <span class="tag tag-bronze">Protocolo Autoral · Corporal</span>
+        <h3 style="margin:16px 0 8px;color:var(--on-dark-1)">CrioShape Moriah</h3>
+        <p style="color:var(--on-dark-2);font-size:var(--fs-small);margin:0 0 20px">Remodelação corporal que vai além da criolipólise — com resultados comparados aos de procedimentos cirúrgicos.</p>
+        <button class="btn btn-on-dark">Saber mais</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: var(--s-5); padding: var(--s-7)" data-reveal>
+      <h4 class="comp-block" style="padding:0;margin-bottom:8px">Acordeão · FAQ</h4>
+      <div class="faq">
+        <div class="faq-item open"><button class="faq-q">A avaliação gratuita gera compromisso de compra?<span class="pm"></span></button><div class="faq-a"><p>Não. A avaliação é um momento de escuta e planejamento, sem nenhuma obrigação. Queremos que você se sinta segura na decisão — e isso começa com informação honesta.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Quanto tempo levam os resultados do CrioShape?<span class="pm"></span></button><div class="faq-a"><p>Os resultados são progressivos: os primeiros sinais aparecem entre 4 e 8 semanas, com resultado completo entre 2 e 4 meses. O número ideal de sessões é definido na avaliação individual.</p></div></div>
+        <div class="faq-item"><button class="faq-q">A toxina botulínica realmente não congela a expressão?<span class="pm"></span></button><div class="faq-a"><p>Quando bem aplicada, não. O planejamento individualizado prioriza a preservação da expressão natural. É técnica e dosagem que fazem a diferença.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APLICAÇÃO ===== -->
+<section id="aplicacao" class="sec" style="background:var(--bege-50)">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">07 — Aplicação</span>
+      <div class="eyebrow">O sistema em uso</div>
+      <h2>Seções da landing page.</h2>
+      <p>Uma amostra do sistema aplicado às seções centrais da landing page comercial — hero, portfólio de tratamentos, chamada para ação e rodapé.</p>
+    </div>
+
+    <!-- HERO -->
+    <div data-reveal>
+      <span class="app-label">Hero · primeira dobra</span>
+      <div class="frame">
+        <div class="hero paper-grain">
+          <svg class="ghost" viewBox="0 0 478.000000 792.000000" aria-hidden="true"><use href="#mk"/></svg>
+          <div class="inner">
+            <span class="eyebrow">Clínica Moriah · Estética Avançada</span>
+            <h1>Você merece <em>se reconhecer</em> no espelho.</h1>
+            <p class="sub">Protocolos exclusivos de harmonização facial e remodelação corporal, desenvolvidos com precisão técnica e olhar individualizado pela Dra. Mayara Fernandes.</p>
+            <div class="ctas">
+              <button class="btn btn-primary">Quero minha avaliação gratuita</button>
+              <button class="btn btn-outline">Conhecer tratamentos</button>
+            </div>
+            <div class="seals">
+              <div class="seal"><b>7+</b><span>Anos de experiência</span></div>
+              <div class="seal"><b>2</b><span>Protocolos autorais</span></div>
+              <div class="seal"><b>100%</b><span>Atendimento personalizado</span></div>
+            </div>
+          </div>
+          <div class="float-badge">
+            <p>“Resultados que respeitam sua essência.”</p>
+            <span>Dra. Mayara Fernandes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRATAMENTOS -->
+    <div data-reveal>
+      <span class="app-label">Tratamentos · portfólio</span>
+      <div class="frame">
+        <div class="treat paper-grain">
+          <div style="max-width:620px;margin-bottom:var(--s-7)">
+            <span class="eyebrow">Protocolos &amp; Tratamentos</span>
+            <h2 style="margin:14px 0 10px">Cada tratamento é único. Como você.</h2>
+            <p style="color:var(--ink-2)">Uma combinação estratégica de tecnologias de última geração e técnicas desenvolvidas por anos de prática clínica avançada.</p>
+          </div>
+          <div class="treat-feature">
+            <div>
+              <span class="tag tag-bronze">Protocolo Autoral · Corporal</span>
+              <h3 style="font-size:2.4rem;margin:16px 0 10px">CrioShape Moriah</h3>
+              <p style="color:var(--ink-2);font-size:var(--fs-small);margin:0">O método exclusivo de remodelação corporal da Moriah. Vai além da criolipólise convencional — reduz gordura localizada, melhora a flacidez e redefine o contorno.</p>
+              <ul class="bens">
+                <li>Redução de gordura localizada resistente</li>
+                <li>Remodelação do contorno pós-gestação</li>
+                <li>Definição de abdômen, flancos, costas e cintura</li>
+              </ul>
+              <button class="btn btn-primary" style="margin-top:var(--s-6)">Quero saber mais sobre o CrioShape</button>
+            </div>
+            <div class="treat-feature">
+              <div class="visual"><div class="aura"></div><div class="qt">“Resultados que a cirurgia entregaria — sem corte, sem recuperação.”</div></div>
+            </div>
+          </div>
+          <div class="treat-mini">
+            <div class="card"><span class="tag">Protocolo Autoral · Facial</span><h3 style="font-size:1.5rem;margin:14px 0 8px">Ultra Face Lifting</h3><p style="color:var(--ink-2);font-size:var(--fs-small);margin:0">Rejuvenescimento estrutural que integra sustentação, firmeza e qualidade da pele.</p></div>
+            <div class="card"><span class="tag">Tratamento Facial</span><h3 style="font-size:1.5rem;margin:14px 0 8px">Toxina Botulínica</h3><p style="color:var(--ink-2);font-size:var(--fs-small);margin:0">Suaviza marcas e previne rugas — mantendo toda a naturalidade da sua expressão.</p></div>
+            <div class="card"><span class="tag tag-outline">Moriah Signature</span><h3 style="font-size:1.5rem;margin:14px 0 8px">Preenchimento Labial</h3><p style="color:var(--ink-2);font-size:var(--fs-small);margin:0">Escultura labial personalizada — equilíbrio e sofisticação, sem aparência artificial.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA DARK -->
+    <div data-reveal>
+      <span class="app-label">CTA central · alto impacto</span>
+      <div class="frame">
+        <div class="cta-dark paper-grain">
+          <svg class="ghost" viewBox="0 0 478.000000 792.000000" aria-hidden="true"><use href="#mk"/></svg>
+          <div class="inner">
+            <span class="eyebrow" style="justify-content:center">Dê o primeiro passo</span>
+            <h2>Sua <em>melhor versão</em> começa com uma avaliação.</h2>
+            <p>Sem compromisso, sem pressão. Apenas uma conversa honesta sobre o que você deseja — e o melhor caminho para chegar lá.</p>
+            <button class="btn btn-primary" style="margin-top:var(--s-5)">Agendar avaliação gratuita via WhatsApp</button>
+            <div class="note">Atendimento presencial · Avaliação sem custo · Sem compromisso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div data-reveal>
+      <span class="app-label">Rodapé</span>
+      <div class="frame" style="box-shadow:var(--sh-md)">
+        <div class="foot">
+          <div class="top">
+            <div class="brandcol">
+              <svg class="mark" viewBox="0 0 478.000000 792.000000"><use href="#mk"/></svg>
+              <div class="tagline">Técnica · Acolhimento · Propósito</div>
+              <p class="desc">Clínica de estética avançada fundada pela Dra. Mayara Fernandes. Um espaço onde cada tratamento é tão único quanto quem o recebe.</p>
+            </div>
+            <div><h4>Tratamentos</h4><ul><li><a href="#">CrioShape Moriah</a></li><li><a href="#">Ultra Face Lifting</a></li><li><a href="#">Toxina Botulínica</a></li><li><a href="#">Preenchimento Labial</a></li></ul></div>
+            <div><h4>Clínica</h4><ul><li><a href="#">Sobre a Dra. Mayara</a></li><li><a href="#">Nossa história</a></li><li><a href="#">Blog</a></li><li><a href="#">Resultados</a></li></ul></div>
+            <div><h4>Contato</h4><ul><li><a href="#">@moriahclinic_</a></li><li><a href="#">WhatsApp</a></li><li><a href="#">Avaliação gratuita</a></li></ul></div>
+          </div>
+          <div class="bottom"><span>© 2025 Moriah Clínica. Todos os direitos reservados.</span><span>Moriah · Deus + Luz</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-sys">
+  <svg class="mark" viewBox="0 0 478.000000 792.000000"><use href="#mk"/></svg>
+  Moriah Clinic · Design System v1.0
+</div>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); }, {threshold:.12});
+  document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+
+  // nav active state
+  const navLinks = [...document.querySelectorAll('#nav a')];
+  const secs = navLinks.map(a=>document.querySelector(a.getAttribute('href')));
+  const navIo = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      const id = '#'+e.target.id;
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+    }});
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>{ if(s) navIo.observe(s); });
+
+  // FAQ
+  function setH(item){ const a=item.querySelector('.faq-a'); a.style.maxHeight = item.classList.contains('open') ? a.scrollHeight+'px' : '0px'; }
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=>{ item.classList.toggle('open'); setH(item); });
+  });
+  document.querySelectorAll('.faq-item.open').forEach(setH);
+  window.addEventListener('resize', ()=>document.querySelectorAll('.faq-item.open').forEach(setH));
+
+  // copiar hex
+  document.querySelectorAll('.sw').forEach(sw=>{
+    sw.addEventListener('click', ()=>{
+      const hex = sw.dataset.hex; const cp = sw.querySelector('.cp');
+      navigator.clipboard && navigator.clipboard.writeText(hex);
+      if(cp){ const o=cp.textContent; cp.textContent='copiado ✓'; cp.classList.add('copied'); setTimeout(()=>{cp.textContent=o;cp.classList.remove('copied');},1200); }
+    });
+  });
+</script>
+</body>
+</html>
