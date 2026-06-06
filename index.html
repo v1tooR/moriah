@@ -294,25 +294,37 @@
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-right { height: 540px; }
+  .hero-right { height: 590px; }
   .hero-photo-block {
-    width: 260px; height: 400px;
-    top: 16px; left: 50%;
+    width: min(330px, calc(100vw - 48px)); height: 500px;
+    top: 14px; left: 50%;
     transform: translateX(-50%);
     border-radius: var(--r-lg);
   }
-  .hero-compare {
-    bottom: 12px;
-    left: 50%; transform: translateX(-50%);
-    width: 240px;
-  }
-  .hero-left { padding: var(--s-8) var(--gutter); }
+  .hero-compare { display: none; }
+  .hero-left { padding: var(--s-7) var(--gutter); }
   .hero-watermark { display: none; }
   .hero-content { max-width: none; }
   .hero-ctas .btn { width: 100%; }
-  .hero-seals { display: flex; gap: 0; flex-wrap: wrap; }
-  .h-seal { padding-right: var(--s-6); padding-left: 0; border-left: 0; }
-  .h-seal + .h-seal { padding-left: var(--s-6); border-left: var(--hairline); }
+  .hero-seals {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-4);
+    max-width: none;
+  }
+  .h-seal {
+    min-height: 76px;
+    padding: var(--s-4);
+    border: var(--hairline-soft);
+    border-radius: var(--r-md);
+    background: rgba(251,250,246,.28);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .h-seal:first-child { padding: var(--s-4); border: var(--hairline-soft); }
+  .h-seal + .h-seal { padding: var(--s-4); border: var(--hairline-soft); }
+  .h-seal:nth-child(3) { grid-column: 1 / -1; }
 }
 
 /* ---- EMPATIA ---- */
@@ -668,41 +680,145 @@
 .footer-col ul a:hover { color: var(--on-dark-1); transform: translateX(2px); }
 .footer-col ul a:hover::before { width: 14px; }
 .wapp-btn-sm {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(201,168,106,.12); color: var(--on-dark-1);
-  border: 1px solid rgba(201,168,106,.28);
-  padding: 10px 15px; border-radius: var(--r-pill);
-  font-size: var(--fs-caption); letter-spacing: .04em; margin-top: 6px;
-  transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast); text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--bronze-metal); color: var(--espresso);
+  border: 1px solid rgba(201,168,106,.38);
+  min-height: 42px; padding: 11px 18px; border-radius: var(--r-pill);
+  font-size: var(--fs-caption); font-weight: 600; letter-spacing: .03em; margin-top: 6px;
+  box-shadow: 0 14px 34px -22px rgba(201,168,106,.7);
+  transition: transform var(--dur-fast), box-shadow var(--dur-fast), filter var(--dur-fast); text-decoration: none;
 }
 .wapp-btn-sm::before { display: none; }
-.wapp-btn-sm:hover { background: rgba(201,168,106,.18); border-color: rgba(201,168,106,.5); color: var(--on-dark-1); transform: translateY(-1px); }
-.wapp-btn-sm svg { width: 14px; height: 14px; }
+.wapp-btn-sm:hover { color: var(--espresso); filter: brightness(1.06); transform: translateY(-2px); box-shadow: 0 18px 42px -22px rgba(201,168,106,.9); }
+.wapp-btn-sm svg { width: 15px; height: 15px; }
 .footer-bottom {
   border-top: var(--hairline-dark); padding: var(--s-5) 0;
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 12px;
   font-size: var(--fs-caption); color: var(--on-dark-3); letter-spacing: .06em;
 }
-.footer-meaning { font-family: var(--font-display); font-style: italic; color: var(--bronze-light); }
 @media (max-width: 860px) { .footer-top { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
 @media (max-width: 540px) {
   .footer-top { grid-template-columns: 1fr; }
   .footer-brand { max-width: none; }
+  .wapp-btn-sm { width: 100%; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
 
+/* ---- CONTATO ---- */
+.contato { background: var(--bege-50); }
+.contato-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s-6); max-width: 860px; margin: var(--s-8) auto 0;
+}
+.contato-card {
+  background: var(--branco); border: var(--hairline-soft); border-radius: var(--r-xl);
+  padding: var(--s-7) var(--s-6); display: flex; flex-direction: column; gap: var(--s-4);
+  box-shadow: var(--sh-sm); transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.contato-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+.contato-eyebrow {
+  font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--marrom); display: block;
+}
+.contato-city {
+  font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+  font-weight: 300; color: var(--ink-1); margin: 0;
+}
+.contato-city em { font-style: italic; color: var(--marrom); }
+.contato-detail {
+  color: var(--ink-2); font-size: var(--fs-small);
+  display: flex; align-items: flex-start; gap: 9px; line-height: 1.5; margin: 0;
+}
+.contato-detail svg { flex: none; color: var(--bronze); margin-top: 2px; }
+.contato-divider { height: 1px; background: var(--hairline-soft, rgba(42,35,32,.08)); border: none; margin: var(--s-1) 0; }
+.contato-social-row { display: flex; gap: 10px; }
+.contato-social-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: var(--fs-caption); font-weight: 500; letter-spacing: .06em; color: var(--ink-3);
+  text-decoration: none; transition: color var(--dur-fast);
+}
+.contato-social-link:hover { color: var(--marrom); }
+.contato-social-link svg { width: 15px; height: 15px; }
+.contato-card .btn { width: 100%; justify-content: center; }
+@media (max-width: 640px) { .contato-grid { grid-template-columns: 1fr; gap: var(--s-5); } }
+
+/* ---- FOOTER SOCIALS ---- */
+.footer-socials { display: flex; gap: 8px; margin-top: var(--s-4); }
+.footer-social-btn {
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  background: rgba(201,168,106,.10); border: 1px solid rgba(201,168,106,.20);
+  display: grid; place-items: center; color: var(--on-dark-2);
+  transition: background var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+  text-decoration: none;
+}
+.footer-social-btn:hover { background: rgba(201,168,106,.26); color: var(--on-dark-1); transform: translateY(-2px); }
+.footer-social-btn svg { width: 16px; height: 16px; }
+.footer-social-btn::before { display: none; }
+
 /* ---- WhatsApp float ---- */
-.float-wapp {
+.float-wapp-wrap {
   position: fixed; bottom: 28px; right: 28px; z-index: 200;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+}
+.float-wapp {
   width: 56px; height: 56px; border-radius: 50%; background: #25D366;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 24px rgba(37,211,102,.4);
   transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
-  text-decoration: none;
+  border: none; cursor: pointer; flex: none;
 }
 .float-wapp:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(37,211,102,.5); }
-.float-wapp svg { width: 28px; height: 28px; color: white; }
+.float-wapp svg { width: 28px; height: 28px; color: white; transition: transform .3s var(--ease); }
+.float-wapp[aria-expanded="true"] svg.wapp-ico-main { display: none; }
+.float-wapp[aria-expanded="false"] svg.wapp-ico-close { display: none; }
+/* Popup */
+.wapp-popup {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 48px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.05);
+  overflow: hidden; width: 264px;
+  transform-origin: bottom right;
+  animation: wapp-in .22s cubic-bezier(.34,1.56,.64,1) both;
+}
+.wapp-popup[hidden] { display: none; }
+@keyframes wapp-in {
+  from { opacity: 0; transform: scale(.82) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)  translateY(0); }
+}
+.wapp-popup-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 13px 16px 11px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.wapp-popup-head span {
+  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(42,35,32,.45);
+}
+.wapp-popup-close {
+  background: none; border: none; cursor: pointer; line-height: 1;
+  font-size: 20px; color: rgba(42,35,32,.3); padding: 0 2px;
+  transition: color .15s;
+}
+.wapp-popup-close:hover { color: rgba(42,35,32,.65); }
+.wapp-popup-option {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,.045);
+  transition: background .15s;
+}
+.wapp-popup-option:last-child { border-bottom: none; }
+.wapp-popup-option:hover { background: rgba(37,211,102,.06); }
+.wapp-opt-icon {
+  width: 40px; height: 40px; border-radius: 50%; background: #25D366;
+  display: grid; place-items: center; flex: none;
+}
+.wapp-opt-icon svg { width: 20px; height: 20px; color: #fff; }
+.wapp-opt-info { flex: 1; min-width: 0; }
+.wapp-opt-info strong { display: block; font-size: .875rem; font-weight: 600; color: #111; line-height: 1.2; }
+.wapp-opt-info span { display: block; font-size: .72rem; color: rgba(42,35,32,.45); margin-top: 2px; }
+.wapp-opt-arrow { flex: none; color: rgba(42,35,32,.2); transition: transform .15s, color .15s; }
+.wapp-popup-option:hover .wapp-opt-arrow { transform: translateX(3px); color: #25D366; }
 
 /* ---- Reveal animations ---- */
 [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
@@ -712,6 +828,53 @@
 [data-reveal][data-delay="3"] { transition-delay: .3s; }
 [data-reveal][data-delay="4"] { transition-delay: .4s; }
 @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
+
+/* ======================================================
+   MOBILE GLOBAL
+   ====================================================== */
+@media (max-width: 860px) {
+  /* Seções com menos padding vertical */
+  .section { padding-block: var(--s-8); }
+  .section-sm { padding-block: var(--s-7); }
+  .sec-head { margin-bottom: var(--s-6); }
+
+  /* Padding interno dos cards */
+  .feat-body { padding: var(--s-6); }
+  .feat-body .btn { width: 100%; justify-content: center; }
+  .solution-box { padding: var(--s-6); }
+  .depo-card { padding: var(--s-5); }
+  .diff-item { padding: var(--s-5) var(--s-4); }
+  .pain-item { padding: var(--s-4); gap: var(--s-3); }
+
+  /* Compare card: badge não corta */
+  .compare-info-row { flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+  .compare-badge { align-self: flex-start; }
+
+  /* Tags: podem quebrar linha */
+  .tag { white-space: normal; line-height: 1.5; }
+
+  /* Sobre: título/conteúdo antes da foto no mobile */
+  .sobre-grid { display: flex; flex-direction: column; }
+  .sobre-content { order: -1; }
+  .sobre-photo-wrap { order: 0; }
+
+  /* Results footer button */
+  .results-footer .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .section { padding-block: 40px; }
+  .hero-right { height: 540px; }
+  .hero-photo-block { width: min(330px, calc(100vw - 48px)); height: 500px; top: 12px; }
+  .hero-compare { display: none; }
+  .compare-info { padding: 10px 12px 12px; }
+  .compare-service-name { font-size: 8px; }
+  .compare-badge { font-size: 8px; padding: 3px 8px; }
+  .compare-quote { font-size: .8rem; }
+  .hero-headline { font-size: clamp(2.4rem, 7vw, 3.2rem); }
+  .h-seal b { font-size: 1.45rem; }
+  .h-seal span { font-size: .78rem; line-height: 1.25; }
+}
 </style>
 </head>
 <body>
@@ -723,9 +886,43 @@
 </svg>
 
 <!-- Float WhatsApp -->
-<a href="https://wa.me/5500000000000" class="float-wapp" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-</a>
+<div class="float-wapp-wrap" id="wappFloat">
+
+  <!-- Popup -->
+  <div class="wapp-popup" id="wappPopup" hidden role="dialog" aria-label="Escolha a unidade">
+    <div class="wapp-popup-head">
+      <span>Escolha sua unidade</span>
+      <button class="wapp-popup-close" id="wappClose" aria-label="Fechar">×</button>
+    </div>
+    <a href="https://wa.me/11915197330" class="wapp-popup-option" target="_blank" rel="noopener">
+      <div class="wapp-opt-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </div>
+      <div class="wapp-opt-info">
+        <strong>São Paulo</strong>
+        <span>Vila Olímpia</span>
+      </div>
+      <svg class="wapp-opt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+    </a>
+    <a href="https://wa.me/55012982645112" class="wapp-popup-option" target="_blank" rel="noopener">
+      <div class="wapp-opt-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </div>
+      <div class="wapp-opt-info">
+        <strong>São José dos Campos</strong>
+        <span>Escritório SJC</span>
+      </div>
+      <svg class="wapp-opt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+    </a>
+  </div>
+
+  <!-- Botão -->
+  <button class="float-wapp" id="wappBtn" aria-label="WhatsApp — escolha a unidade" aria-expanded="false" aria-controls="wappPopup">
+    <svg class="wapp-ico-main" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <svg class="wapp-ico-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="22" height="22"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+
+</div>
 
 <!-- ===== NAV ===== -->
 <header class="lp-nav" id="nav">
@@ -738,8 +935,9 @@
       <a href="#sobre">A Clínica</a>
       <a href="#depoimentos">Resultados</a>
       <a href="#faq">Dúvidas</a>
+      <a href="#contato">Contato</a>
     </nav>
-    <a href="https://wa.me/5500000000000" class="nav-cta" target="_blank" rel="noopener">Avaliação Gratuita</a>
+    <a href="https://wa.me/11915197330" class="nav-cta" target="_blank" rel="noopener">Avaliação Gratuita</a>
   </div>
 </header>
 
@@ -756,7 +954,7 @@
         Protocolos exclusivos de harmonização facial e remodelação corporal, desenvolvidos com precisão técnica e olhar individualizado pela Dra. Mayara Fernandes.
       </p>
       <div class="hero-ctas" data-reveal data-delay="3">
-        <a href="https://wa.me/5500000000000" class="btn btn-primary" target="_blank" rel="noopener">
+        <a href="https://wa.me/11915197330" class="btn btn-primary" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           Quero minha avaliação gratuita
         </a>
@@ -854,7 +1052,7 @@
         <p>Cada plano é desenhado depois de uma avaliação detalhada, combinando as melhores tecnologias para o seu objetivo específico — sem exageros, sem perder sua identidade.</p>
         <p>O resultado não é uma transformação radical. É você, na sua melhor versão — mais definida, mais firme, mais leve.</p>
         <blockquote>"Natural o suficiente para que percebam a melhora, mas não o procedimento."</blockquote>
-        <a href="https://wa.me/5500000000000" class="btn btn-on-dark" target="_blank" rel="noopener" style="margin-top:var(--s-2);">Agendar avaliação gratuita →</a>
+        <a href="https://wa.me/11915197330" class="btn btn-on-dark" target="_blank" rel="noopener" style="margin-top:var(--s-2);">Agendar avaliação gratuita →</a>
         <cite>— Dra. Mayara Fernandes</cite>
       </div>
     </div>
@@ -890,7 +1088,7 @@
           <li>Suporte a pacientes em processo de emagrecimento</li>
           <li>Definição de abdômen, flancos, costas e cintura</li>
         </ul>
-        <a href="https://wa.me/5500000000000" class="btn btn-primary" target="_blank" rel="noopener">Quero saber mais sobre o CrioShape</a>
+        <a href="https://wa.me/11915197330" class="btn btn-primary" target="_blank" rel="noopener">Saiba mais sobre o CrioShape</a>
       </div>
     </div>
 
@@ -906,7 +1104,7 @@
           <span class="tag">Protocolo Autoral · Facial</span>
           <h3>Ultra Face Lifting</h3>
           <p>Protocolo exclusivo de rejuvenescimento estrutural que trabalha sustentação, firmeza e qualidade da pele de forma integrada.</p>
-          <a href="https://wa.me/5500000000000" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
+          <a href="https://wa.me/11915197330" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
         </div>
       </div>
       <!-- Toxina Botulínica -->
@@ -919,7 +1117,7 @@
           <span class="tag">Tratamento Facial</span>
           <h3>Toxina Botulínica</h3>
           <p>Não é sobre congelar o rosto. É sobre suavizar marcas e devolver um aspecto mais descansado — mantendo toda a naturalidade da sua expressão.</p>
-          <a href="https://wa.me/5500000000000" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
+          <a href="https://wa.me/11915197330" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
         </div>
       </div>
       <!-- Preenchimento Labial -->
@@ -932,7 +1130,7 @@
           <span class="tag">Moriah Signature · Facial</span>
           <h3>Preenchimento Labial Signature</h3>
           <p>Uma escultura labial personalizada — técnica com cânula, anestesia, produtos premium e reavaliação em 2 meses.</p>
-          <a href="https://wa.me/5500000000000" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
+          <a href="https://wa.me/11915197330" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
         </div>
       </div>
     </div>
@@ -970,7 +1168,7 @@
       </div>
     </div>
     <div class="diff-cta" data-reveal>
-      <a href="https://wa.me/5500000000000" class="btn btn-primary" target="_blank" rel="noopener">Quero minha avaliação gratuita →</a>
+      <a href="https://wa.me/11915197330" class="btn btn-primary" target="_blank" rel="noopener">Quero minha avaliação gratuita →</a>
     </div>
   </div>
 </section>
@@ -1116,9 +1314,9 @@
 
     <div class="results-footer" data-reveal>
       <p>"Quer ver o seu resultado aqui?"</p>
-      <a href="https://wa.me/5500000000000" class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/11915197330" class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        Agendar minha avaliação gratuita
+        Agendar avaliação gratuita
       </a>
     </div>
   </div>
@@ -1166,9 +1364,9 @@
       <div class="eyebrow" style="justify-content:center;">Dê o primeiro passo</div>
       <h2>Sua melhor versão começa com <em>uma avaliação</em></h2>
       <p>Sem compromisso, sem pressão. Apenas uma conversa honesta sobre o que você deseja — e o melhor caminho para chegar lá.</p>
-      <a href="https://wa.me/5500000000000" class="btn btn-on-dark" target="_blank" rel="noopener" style="font-size:1rem;padding:16px 36px;">
+      <a href="https://wa.me/11915197330" class="btn btn-on-dark" target="_blank" rel="noopener" style="font-size:1rem;padding:16px 36px;">
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        Agendar avaliação gratuita via WhatsApp
+        Agendar avaliação gratuita
       </a>
       <p class="note">Atendimento presencial · Avaliação sem custo · Sem compromisso</p>
     </div>
@@ -1317,19 +1515,79 @@
       </div>
     </div>
     <div class="faq-cta" data-reveal>
-      <a href="https://wa.me/5500000000000" class="btn btn-outline" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a href="https://wa.me/11915197330" class="btn btn-outline" target="_blank" rel="noopener">Falar no WhatsApp</a>
     </div>
   </div>
 </section>
 
-<!-- ===== 10 CTA FINAL ===== -->
+<!-- ===== 10 CONTATO ===== -->
+<section id="contato" class="contato section">
+  <div class="ct">
+    <div class="sec-head text-center" data-reveal>
+      <div class="eyebrow sec-eyebrow" style="justify-content:center;">Nossas Unidades</div>
+      <h2 class="sec-title" style="font-size:clamp(2rem,3.6vw,3rem);font-weight:300;">Estamos perto de <em class="serif-italic">você</em></h2>
+      <p class="sec-sub">Duas unidades, o mesmo padrão de excelência e atendimento personalizado que é a marca registrada da Moriah.</p>
+    </div>
+    <div class="contato-grid">
+
+      <!-- São Paulo -->
+      <div class="contato-card" data-reveal data-delay="1">
+        <span class="contato-eyebrow">São Paulo</span>
+        <h3 class="contato-city">Vila <em>Olímpia</em></h3>
+        <p class="contato-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Vila Olímpia · São Paulo – SP
+        </p>
+        <hr class="contato-divider">
+        <div class="contato-social-row">
+          <a href="https://www.instagram.com/moriahclinic_/" class="contato-social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @moriahclinic_
+          </a>
+          <a href="https://www.facebook.com/mfbeatycenter?mibextid=LQQJ4d" class="contato-social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook
+          </a>
+        </div>
+        <a href="https://wa.me/11915197330" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp · Vila Olímpia
+        </a>
+      </div>
+
+      <!-- São José dos Campos -->
+      <div class="contato-card" data-reveal data-delay="2">
+        <span class="contato-eyebrow">São José dos Campos</span>
+        <h3 class="contato-city">Escritório <em>SJC</em></h3>
+        <p class="contato-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          São José dos Campos – SP
+        </p>
+        <hr class="contato-divider">
+        <div class="contato-social-row">
+          <a href="https://www.instagram.com/moriahclinic_/" class="contato-social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @moriahclinic_
+          </a>
+        </div>
+        <a href="https://wa.me/55012982645112" class="btn btn-outline" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp · São José
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 11 CTA FINAL ===== -->
 <section class="cta-final">
   <svg class="cta-final-mark" viewBox="0 0 478 792" aria-hidden="true"><use href="#mk"/></svg>
   <div class="ct">
     <div class="inner" data-reveal>
       <h2><em>Pronta</em> para se reconhecer no espelho?</h2>
       <p>Agende sua avaliação gratuita agora. Sem fila de espera, sem burocracia — apenas uma conversa para entender o que você precisa.</p>
-      <a href="https://wa.me/5500000000000" class="btn-gold-dark" target="_blank" rel="noopener">
+      <a href="https://wa.me/11915197330" class="btn-gold-dark" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Agendar agora pelo WhatsApp
       </a>
@@ -1348,6 +1606,17 @@
         </a>
         <span class="footer-tagline">Técnica · Acolhimento · Propósito</span>
         <p class="footer-desc">Clínica de estética avançada fundada pela Dra. Mayara Fernandes. Um espaço onde cada tratamento é tão único quanto quem o recebe.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/moriahclinic_/" class="footer-social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/mfbeatycenter?mibextid=LQQJ4d" class="footer-social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/11915197330" class="footer-social-btn" target="_blank" rel="noopener" aria-label="WhatsApp SP">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
       </div>
       <div class="footer-col">
         <h5>Tratamentos</h5>
@@ -1371,25 +1640,58 @@
         <h5>Contato</h5>
         <ul>
           <li>
-            <a href="https://wa.me/5500000000000" class="wapp-btn-sm" target="_blank" rel="noopener">
+            <a href="https://wa.me/11915197330" class="wapp-btn-sm" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Agendar pelo WhatsApp
+              SP · Vila Olímpia
             </a>
           </li>
-          <li><a href="https://instagram.com/moriahclinic_" target="_blank" rel="noopener">@moriahclinic_</a></li>
-          <li><a href="https://wa.me/5500000000000" target="_blank" rel="noopener">Avaliação gratuita</a></li>
+          <li>
+            <a href="https://wa.me/55012982645112" class="wapp-btn-sm" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              SJC · São José
+            </a>
+          </li>
+          <li><a href="https://www.instagram.com/moriahclinic_/" target="_blank" rel="noopener">@moriahclinic_</a></li>
+          <li><a href="https://www.facebook.com/mfbeatycenter?mibextid=LQQJ4d" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 Moriah Clínica. Todos os direitos reservados.</span>
-      <span class="footer-meaning">Moriah · Deus + Luz</span>
     </div>
   </div>
 </footer>
 
 <script>
 (function(){
+  // WhatsApp float popup
+  const wappBtn   = document.getElementById('wappBtn');
+  const wappPopup = document.getElementById('wappPopup');
+  const wappClose = document.getElementById('wappClose');
+  const wappWrap  = document.getElementById('wappFloat');
+
+  function openPopup() {
+    wappPopup.hidden = false;
+    wappBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closePopup() {
+    wappPopup.hidden = true;
+    wappBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  if (wappBtn && wappPopup) {
+    wappBtn.addEventListener('click', () => {
+      wappPopup.hidden ? openPopup() : closePopup();
+    });
+    wappClose.addEventListener('click', closePopup);
+    document.addEventListener('click', e => {
+      if (!wappWrap.contains(e.target)) closePopup();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePopup();
+    });
+  }
+
   // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
