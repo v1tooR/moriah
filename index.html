@@ -432,10 +432,6 @@
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .diff-item:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
-.diff-num {
-  font-family: var(--font-display); font-style: italic; color: var(--nude);
-  font-size: 5rem; line-height: 1; position: absolute; top: -12px; right: 12px; pointer-events: none;
-}
 .diff-item h4 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; margin: 0 0 var(--s-3); }
 .diff-item p { color: var(--ink-2); font-size: var(--fs-small); margin: 0; }
 .diff-cta { text-align: center; margin-top: var(--s-8); }
@@ -445,10 +441,66 @@
 }
 @media (max-width: 540px) { .diff-grid { grid-template-columns: 1fr; } }
 
+/* ---- GALERIA DE RESULTADOS ---- */
+.resultados { background: var(--branco); }
+.results-filters {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center; margin-bottom: var(--s-8);
+}
+.rf-btn {
+  font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: 500;
+  letter-spacing: .10em; text-transform: uppercase;
+  color: var(--ink-3); background: transparent;
+  border: 1px solid rgba(42,35,32,.16); border-radius: var(--r-pill);
+  padding: 10px 18px; cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+}
+.rf-btn:hover { color: var(--marrom); border-color: rgba(169,138,82,.45); }
+.rf-btn.rf-active { background: var(--espresso); color: var(--on-dark-1); border-color: var(--espresso); }
+.results-grid {
+  columns: 4; column-gap: var(--s-4);
+  margin-bottom: var(--s-8);
+}
+.rcard {
+  position: relative; overflow: hidden; border-radius: var(--r-lg);
+  break-inside: avoid; margin-bottom: var(--s-4);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.rcard:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); }
+.rcard img { width: 100%; display: block; transition: transform .72s var(--ease); }
+.rcard:hover img { transform: scale(1.05); }
+.rcard-ov {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(42,35,32,.7) 0%, transparent 52%);
+  display: flex; align-items: flex-end; padding: 14px;
+}
+.rcard-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(251,250,246,.96);
+  background: rgba(42,35,32,.55); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.16);
+  padding: 5px 11px; border-radius: var(--r-pill);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.rcard:hover .rcard-tag { background: var(--bronze-metal); border-color: transparent; }
+.rcard[data-hidden] { display: none; }
+.results-footer { text-align: center; }
+.results-footer p {
+  font-family: var(--font-display); font-style: italic; font-size: 1.2rem;
+  color: var(--ink-2); margin-bottom: var(--s-5);
+}
+@media (max-width: 900px) { .results-grid { columns: 2; } }
+@media (max-width: 480px)  { .results-grid { columns: 2; } }
+
 /* ---- SOBRE ---- */
 .sobre { background: var(--branco); }
 .sobre-grid { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s-9); align-items: start; }
-.sobre-photo-wrap { position: relative; }
+.sobre-photo-wrap {
+  position: sticky;
+  top: calc(72px + var(--s-5));
+  align-self: start;
+}
 .sobre-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: var(--r-xl); display: block; box-shadow: var(--sh-lg); }
 .sobre-badge {
   position: absolute; bottom: -18px; right: -18px;
@@ -477,7 +529,7 @@
 .sobre-cite { font-size: var(--fs-caption); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 @media (max-width: 860px) {
   .sobre-grid { grid-template-columns: 1fr; gap: var(--s-7); }
-  .sobre-photo-wrap { max-width: 360px; }
+  .sobre-photo-wrap { position: relative; top: auto; max-width: 360px; }
   .sobre-badge { right: 12px; bottom: 12px; }
 }
 
@@ -521,14 +573,18 @@
   background: var(--cream); border: var(--hairline-soft); border-radius: var(--r-lg);
   overflow: hidden; display: flex; flex-direction: column;
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  text-decoration: none;
 }
 .blog-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
 .blog-thumb {
   background: linear-gradient(135deg, var(--nude) 0%, var(--marrom) 100%);
   aspect-ratio: 3/2; display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
 }
 .blog-thumb-lg { aspect-ratio: 4/3; }
 .blog-thumb svg { width: 56px; color: rgba(255,255,255,.2); }
+.blog-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-slow) var(--ease); }
+.blog-card:hover .blog-thumb img { transform: scale(1.04); }
 .blog-body { padding: var(--s-5); flex: 1; display: flex; flex-direction: column; }
 .blog-meta { display: flex; gap: 12px; align-items: center; margin-bottom: var(--s-3); }
 .blog-cat { font-size: var(--fs-eyebrow); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--marrom); }
@@ -538,6 +594,7 @@
 .blog-card p { color: var(--ink-2); font-size: var(--fs-small); flex: 1; margin: 0 0 var(--s-4); }
 .blog-link { font-size: var(--fs-caption); font-weight: 500; letter-spacing: .06em; color: var(--marrom); display: inline-flex; align-items: center; gap: 6px; transition: gap var(--dur-fast); }
 .blog-card:hover .blog-link { gap: 10px; }
+.blog-section .blog-all { text-align: center; margin-top: var(--s-7); }
 @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
 
 /* ---- FAQ ---- */
@@ -565,41 +622,61 @@
 }
 .cta-final-mark {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
-  width: 480px; color: rgba(42,35,32,.07); pointer-events: none;
+  width: 480px; color: rgba(42,35,32,.16); pointer-events: none;
 }
 .cta-final .inner { position: relative; z-index: 2; max-width: 560px; margin: 0 auto; }
-.cta-final h2 { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 300; color: var(--espresso); margin: 0 0 var(--s-4); }
+.cta-final h2 { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 300; color: var(--on-dark-1); margin: 0 0 var(--s-4); }
 .cta-final h2 em { font-style: italic; }
-.cta-final p { color: rgba(42,35,32,.72); font-size: 1.05rem; margin-bottom: var(--s-7); }
+.cta-final p { color: rgba(255,255,255,.88); font-size: 1.05rem; margin-bottom: var(--s-7); }
 .btn-gold-dark {
-  background: var(--espresso); color: var(--on-dark-1);
+  background: linear-gradient(-45deg, var(--espresso), var(--marrom-deep), var(--bronze-deep), var(--marrom-deep), var(--espresso));
+  background-size: 700% 400%;
+  color: var(--on-dark-1);
   font-family: var(--font-body); font-size: var(--fs-small); font-weight: 500; letter-spacing: .02em;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 16px 36px; border-radius: var(--r-pill); border: none; cursor: pointer; text-decoration: none;
+  animation: btn-gold-gradient 9s infinite cubic-bezier(.62,.28,.23,.99) both;
   transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
-.btn-gold-dark:hover { transform: translateY(-2px); box-shadow: 0 16px 48px -16px rgba(42,35,32,.35); }
-.cta-final .note { margin-top: var(--s-5); font-size: var(--fs-caption); letter-spacing: .14em; text-transform: uppercase; color: rgba(42,35,32,.5); }
+.btn-gold-dark:hover {
+  background-image: var(--bronze-metal);
+  color: var(--on-dark-1);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px -16px rgba(42,35,32,.35), 0 0 24px rgba(201,168,106,.24);
+}
+.cta-final .note { margin-top: var(--s-5); font-size: var(--fs-caption); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.72); }
 
 /* ---- FOOTER ---- */
 .footer { background: var(--marrom-deep); color: var(--on-dark-1); padding: var(--s-9) 0 0; }
-.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: var(--s-6); padding-bottom: var(--s-8); }
-.footer-mark { width: 30px; height: 40px; color: var(--bronze-light); display: block; margin-bottom: var(--s-4); }
-.footer-name { font-family: var(--font-display); font-size: 1.7rem; color: var(--on-dark-1); letter-spacing: .1em; display: block; margin-bottom: 3px; }
+.footer-top { display: grid; grid-template-columns: minmax(260px, 1.45fr) repeat(3, minmax(140px, 1fr)); gap: var(--s-7); padding-bottom: var(--s-8); }
+.footer-brand { max-width: 320px; }
+.footer-logo-lockup { display: inline-flex; margin-bottom: var(--s-4); }
+.footer-logo { width: 150px; height: auto; color: var(--on-dark-1); display: block; }
 .footer-tagline { font-family: var(--font-display); font-style: italic; color: var(--on-dark-2); font-size: var(--fs-small); display: block; margin-bottom: var(--s-4); }
-.footer-desc { color: var(--on-dark-3); font-size: var(--fs-caption); max-width: 28ch; }
-.footer-col h5 { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-caption); letter-spacing: .16em; text-transform: uppercase; color: var(--on-dark-3); margin: 0 0 var(--s-4); }
-.footer-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.footer-col ul a { color: var(--on-dark-2); font-size: var(--fs-small); transition: color var(--dur-fast); }
-.footer-col ul a:hover { color: var(--on-dark-1); }
+.footer-desc { color: var(--on-dark-2); font-size: var(--fs-caption); max-width: 32ch; line-height: 1.7; }
+.footer-col h5 { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-caption); letter-spacing: .16em; text-transform: uppercase; color: var(--bronze-light); margin: 0 0 var(--s-4); }
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.footer-col ul a {
+  color: var(--on-dark-2); font-size: var(--fs-small); line-height: 1.35;
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  padding: 4px 0; transition: color var(--dur-fast), transform var(--dur-fast);
+}
+.footer-col ul a::before {
+  content: ""; width: 0; height: 1px; background: var(--bronze-light);
+  transition: width var(--dur-fast);
+}
+.footer-col ul a:hover { color: var(--on-dark-1); transform: translateX(2px); }
+.footer-col ul a:hover::before { width: 14px; }
 .wapp-btn-sm {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(37,211,102,.14); color: #5cde8d;
-  padding: 9px 14px; border-radius: var(--r-pill);
-  font-size: var(--fs-caption); letter-spacing: .04em; margin-top: 4px;
-  transition: background var(--dur-fast); text-decoration: none;
+  background: rgba(201,168,106,.12); color: var(--on-dark-1);
+  border: 1px solid rgba(201,168,106,.28);
+  padding: 10px 15px; border-radius: var(--r-pill);
+  font-size: var(--fs-caption); letter-spacing: .04em; margin-top: 6px;
+  transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast); text-decoration: none;
 }
-.wapp-btn-sm:hover { background: rgba(37,211,102,.24); color: #5cde8d; }
+.wapp-btn-sm::before { display: none; }
+.wapp-btn-sm:hover { background: rgba(201,168,106,.18); border-color: rgba(201,168,106,.5); color: var(--on-dark-1); transform: translateY(-1px); }
 .wapp-btn-sm svg { width: 14px; height: 14px; }
 .footer-bottom {
   border-top: var(--hairline-dark); padding: var(--s-5) 0;
@@ -608,9 +685,10 @@
   font-size: var(--fs-caption); color: var(--on-dark-3); letter-spacing: .06em;
 }
 .footer-meaning { font-family: var(--font-display); font-style: italic; color: var(--bronze-light); }
-@media (max-width: 860px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 860px) { .footer-top { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
 @media (max-width: 540px) {
   .footer-top { grid-template-columns: 1fr; }
+  .footer-brand { max-width: none; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
 
@@ -875,22 +953,18 @@
     </div>
     <div class="diff-grid">
       <div class="diff-item" data-reveal data-delay="1">
-        <span class="diff-num">i</span>
         <h4>Protocolos Autorais</h4>
         <p>CrioShape Moriah e Ultra Face Lifting são métodos exclusivos desenvolvidos pela Dra. Mayara após anos de estudo e prática clínica avançada.</p>
       </div>
       <div class="diff-item" data-reveal data-delay="2">
-        <span class="diff-num">ii</span>
         <h4>Avaliação Individual</h4>
         <p>Nenhum plano de tratamento é genérico. Cada protocolo é desenhado após avaliação detalhada, considerando sua anatomia e seu momento de vida.</p>
       </div>
       <div class="diff-item" data-reveal data-delay="3">
-        <span class="diff-num">iii</span>
         <h4>Naturalidade Acima de Tudo</h4>
         <p>O foco não é transformar — é reposicionar. Que percebam a melhora, não o procedimento. Resultados elegantes que preservam sua identidade.</p>
       </div>
       <div class="diff-item" data-reveal data-delay="4">
-        <span class="diff-num">iv</span>
         <h4>Referência em Correções</h4>
         <p>A Dra. Mayara atua em casos de correções e reconstrução estética, ajudando pacientes a recuperarem harmonia e autoestima.</p>
       </div>
@@ -901,7 +975,156 @@
   </div>
 </section>
 
-<!-- ===== 05 SOBRE ===== -->
+<!-- ===== 05 GALERIA DE RESULTADOS ===== -->
+<section id="resultados" class="resultados section">
+  <div class="ct">
+    <div class="sec-head text-center">
+      <div class="eyebrow sec-eyebrow" style="justify-content:center;" data-reveal>Galeria de Resultados</div>
+      <h2 class="sec-title" data-reveal data-delay="1" style="font-weight:300;">
+        Transformações que <em class="serif-italic">falam</em> por si só
+      </h2>
+      <p class="sec-sub" data-reveal data-delay="2">
+        Casos reais, protocolos individualizados. Cada resultado é único — como cada paciente.
+      </p>
+    </div>
+
+    <!-- Filtros por procedimento -->
+    <div class="results-filters" data-reveal data-delay="3">
+      <button class="rf-btn rf-active" data-filter="all">Todos</button>
+      <button class="rf-btn" data-filter="labial">Preenchimento Labial</button>
+      <button class="rf-btn" data-filter="crio">CrioShape</button>
+      <button class="rf-btn" data-filter="toxina">Toxina Botulínica</button>
+      <button class="rf-btn" data-filter="ultra">Ultra Face Lift</button>
+    </div>
+
+    <!-- Grid masonry -->
+    <div class="results-grid" data-reveal data-delay="1">
+
+      <!-- Preenchimento Labial -->
+      <div class="rcard" data-service="labial">
+        <img src="Preenchimento labial -20260605T192413Z-3-001/Preenchimento labial/IMG_1136.PNG"
+             alt="Resultado Preenchimento Labial" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Preenchimento Labial</span></div>
+      </div>
+
+      <!-- CrioShape -->
+      <div class="rcard" data-service="crio">
+        <img src="CrioShape Moriah (Criomodelagem) -20260605T192413Z-3-001/CrioShape Moriah (Criomodelagem)/Criolipolise  (Post para Instagram (45)) - 70.png"
+             alt="Resultado CrioShape Moriah" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">CrioShape Moriah</span></div>
+      </div>
+
+      <!-- Toxina -->
+      <div class="rcard" data-service="toxina">
+        <img src="Toxina Botulínica -20260605T192415Z-3-001/Toxina Botulínica/Botox (1080 x 1440 px) - 85.png"
+             alt="Resultado Toxina Botulínica" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Toxina Botulínica</span></div>
+      </div>
+
+      <!-- UltraFace -->
+      <div class="rcard" data-service="ultra">
+        <img src="UltraFace Lift -20260605T192417Z-3-001/UltraFace Lift/Botox (1080 x 1440 px) - 109.png"
+             alt="Resultado Ultra Face Lift" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Ultra Face Lift</span></div>
+      </div>
+
+      <!-- Preenchimento -->
+      <div class="rcard" data-service="labial">
+        <img src="Preenchimento labial -20260605T192413Z-3-001/Preenchimento labial/IMG_1137.PNG"
+             alt="Resultado Preenchimento Labial" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Preenchimento Labial</span></div>
+      </div>
+
+      <!-- CrioShape -->
+      <div class="rcard" data-service="crio">
+        <img src="CrioShape Moriah (Criomodelagem) -20260605T192413Z-3-001/CrioShape Moriah (Criomodelagem)/Criolipolise  (Post para Instagram (45)) - 62.png"
+             alt="Resultado CrioShape Moriah" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">CrioShape Moriah</span></div>
+      </div>
+
+      <!-- Toxina -->
+      <div class="rcard" data-service="toxina">
+        <img src="Toxina Botulínica -20260605T192415Z-3-001/Toxina Botulínica/Botox (1080 x 1440 px) - 83.png"
+             alt="Resultado Toxina Botulínica" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Toxina Botulínica</span></div>
+      </div>
+
+      <!-- UltraFace -->
+      <div class="rcard" data-service="ultra">
+        <img src="UltraFace Lift -20260605T192417Z-3-001/UltraFace Lift/IMG_4386.PNG"
+             alt="Resultado Ultra Face Lift" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Ultra Face Lift</span></div>
+      </div>
+
+      <!-- Preenchimento -->
+      <div class="rcard" data-service="labial">
+        <img src="Preenchimento labial -20260605T192413Z-3-001/Preenchimento labial/IMG_1131.JPG"
+             alt="Resultado Preenchimento Labial" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Preenchimento Labial</span></div>
+      </div>
+
+      <!-- CrioShape -->
+      <div class="rcard" data-service="crio">
+        <img src="CrioShape Moriah (Criomodelagem) -20260605T192413Z-3-001/CrioShape Moriah (Criomodelagem)/Criolipolise  (Post para Instagram (45)) - 68.png"
+             alt="Resultado CrioShape Moriah" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">CrioShape Moriah</span></div>
+      </div>
+
+      <!-- Toxina -->
+      <div class="rcard" data-service="toxina">
+        <img src="Toxina Botulínica -20260605T192415Z-3-001/Toxina Botulínica/Botox (1080 x 1440 px) - 84.png"
+             alt="Resultado Toxina Botulínica" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Toxina Botulínica</span></div>
+      </div>
+
+      <!-- UltraFace -->
+      <div class="rcard" data-service="ultra">
+        <img src="UltraFace Lift -20260605T192417Z-3-001/UltraFace Lift/IMG_4387.PNG"
+             alt="Resultado Ultra Face Lift" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Ultra Face Lift</span></div>
+      </div>
+
+      <!-- Preenchimento -->
+      <div class="rcard" data-service="labial">
+        <img src="Preenchimento labial -20260605T192413Z-3-001/Preenchimento labial/E534F1DE-A084-4E40-8D85-CCC4AC6614E3.jpg"
+             alt="Resultado Preenchimento Labial" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Preenchimento Labial</span></div>
+      </div>
+
+      <!-- CrioShape -->
+      <div class="rcard" data-service="crio">
+        <img src="CrioShape Moriah (Criomodelagem) -20260605T192413Z-3-001/CrioShape Moriah (Criomodelagem)/Criolipolise  (Post para Instagram (45)) - 71.png"
+             alt="Resultado CrioShape Moriah" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">CrioShape Moriah</span></div>
+      </div>
+
+      <!-- Toxina -->
+      <div class="rcard" data-service="toxina">
+        <img src="Toxina Botulínica -20260605T192415Z-3-001/Toxina Botulínica/Botox (1080 x 1440 px) - 86(1).png"
+             alt="Resultado Toxina Botulínica" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Toxina Botulínica</span></div>
+      </div>
+
+      <!-- UltraFace -->
+      <div class="rcard" data-service="ultra">
+        <img src="UltraFace Lift -20260605T192417Z-3-001/UltraFace Lift/Microfocado.zip - 49.jpg"
+             alt="Resultado Ultra Face Lift" loading="lazy">
+        <div class="rcard-ov"><span class="rcard-tag">Ultra Face Lift</span></div>
+      </div>
+
+    </div><!-- /results-grid -->
+
+    <div class="results-footer" data-reveal>
+      <p>"Quer ver o seu resultado aqui?"</p>
+      <a href="https://wa.me/5500000000000" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Agendar minha avaliação gratuita
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 SOBRE ===== -->
 <section id="sobre" class="sobre section">
   <div class="ct">
     <div class="sobre-grid">
@@ -997,8 +1220,8 @@
       <h2 class="sec-title" style="font-size:clamp(2rem,3.6vw,3rem);font-weight:300;">Conhecimento que transforma</h2>
       <p class="sec-sub">Informação de qualidade sobre estética avançada, escrita por quem faz na prática.</p>
     </div>
-    <div class="blog-grid">
-      <div class="blog-card blog-card-feat" data-reveal>
+    <div class="blog-grid" data-wp-posts>
+      <a class="blog-card blog-card-feat" href="/blog/" data-reveal>
         <div class="blog-thumb blog-thumb-lg">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
@@ -1008,8 +1231,8 @@
           <p>A criolipólise sozinha reduz gordura localizada. O CrioShape Moriah faz isso — e muito mais. Entenda como a combinação estratégica de tecnologias transforma não apenas o número na balança, mas o contorno corporal como um todo.</p>
           <span class="blog-link">Leia o artigo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
-      <div class="blog-card" data-reveal data-delay="2">
+      </a>
+      <a class="blog-card" href="/blog/" data-reveal data-delay="2">
         <div class="blog-thumb">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
         </div>
@@ -1019,8 +1242,8 @@
           <p>De indicações a mitos sobre o "rosto congelado" — o que realmente importa saber antes de agendar sua sessão.</p>
           <span class="blog-link">Leia o artigo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
-      <div class="blog-card" data-reveal data-delay="3">
+      </a>
+      <a class="blog-card" href="/blog/" data-reveal data-delay="3">
         <div class="blog-thumb">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
@@ -1030,10 +1253,10 @@
           <p>A gestação transforma o corpo de formas únicas. Saiba quais tratamentos são indicados e o que esperar de resultado.</p>
           <span class="blog-link">Leia o artigo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
     </div>
-    <div style="text-align:center;margin-top:var(--s-7);" data-reveal>
-      <a href="#" class="btn btn-outline">Ver todos os artigos</a>
+    <div class="blog-all" data-reveal>
+      <a href="/blog/" class="btn btn-outline">Ver todos os artigos</a>
     </div>
   </div>
 </section>
@@ -1120,8 +1343,9 @@
   <div class="ct">
     <div class="footer-top">
       <div class="footer-brand">
-        <svg class="footer-mark" viewBox="0 0 478 792"><use href="#mk"/></svg>
-        <span class="footer-name">MORIAH</span>
+        <a class="footer-logo-lockup" href="#hero" aria-label="Voltar ao início">
+          <svg class="footer-logo" viewBox="0 0 1272 390" aria-hidden="true"><use href="#logo"/></svg>
+        </a>
         <span class="footer-tagline">Técnica · Acolhimento · Propósito</span>
         <p class="footer-desc">Clínica de estética avançada fundada pela Dra. Mayara Fernandes. Um espaço onde cada tratamento é tão único quanto quem o recebe.</p>
       </div>
@@ -1138,21 +1362,21 @@
         <h5>Clínica</h5>
         <ul>
           <li><a href="#sobre">Sobre a Dra. Mayara</a></li>
-          <li><a href="#sobre">Nossa história</a></li>
-          <li><a href="#depoimentos">Resultados</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="#resultados">Galeria de resultados</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#faq">Dúvidas frequentes</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Contato</h5>
         <ul>
-          <li><a href="https://instagram.com/moriahclinic_" target="_blank" rel="noopener">@moriahclinic_</a></li>
           <li>
             <a href="https://wa.me/5500000000000" class="wapp-btn-sm" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              WhatsApp
+              Agendar pelo WhatsApp
             </a>
           </li>
+          <li><a href="https://instagram.com/moriahclinic_" target="_blank" rel="noopener">@moriahclinic_</a></li>
           <li><a href="https://wa.me/5500000000000" target="_blank" rel="noopener">Avaliação gratuita</a></li>
         </ul>
       </div>
@@ -1177,6 +1401,119 @@
     entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+
+  // Gallery filter
+  document.querySelectorAll('.rf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.rf-btn').forEach(b => b.classList.remove('rf-active'));
+      btn.classList.add('rf-active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.rcard').forEach(card => {
+        if (f === 'all' || card.dataset.service === f) {
+          card.removeAttribute('data-hidden');
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // WordPress latest posts
+  const blogGrid = document.querySelector('[data-wp-posts]');
+  const blogAll = document.querySelector('.blog-all .btn');
+  const blogBase = new URL('blog/', window.location.href);
+  const postsEndpoint = new URL('wp-json/wp/v2/posts', blogBase);
+  postsEndpoint.search = new URLSearchParams({
+    per_page: '3',
+    _embed: '1',
+    orderby: 'date',
+    order: 'desc'
+  }).toString();
+
+  const stripHtml = (value = '') => {
+    const doc = new DOMParser().parseFromString(value, 'text/html');
+    return (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+  };
+
+  const escapeHtml = (value = '') => value.replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+
+  const formatDate = value => {
+    if (!value) return '';
+    return new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short' }).format(new Date(value)).replace('.', '');
+  };
+
+  const getPostImage = post => {
+    const media = post?._embedded?.['wp:featuredmedia']?.[0];
+    return media?.media_details?.sizes?.large?.source_url ||
+      media?.media_details?.sizes?.medium_large?.source_url ||
+      media?.media_details?.sizes?.medium?.source_url ||
+      media?.source_url ||
+      '';
+  };
+
+  const getPostCategory = post => {
+    const terms = post?._embedded?.['wp:term']?.flat?.() || [];
+    const category = terms.find(term => term.taxonomy === 'category');
+    return category?.name || 'Blog';
+  };
+
+  const createPostCard = (post, index) => {
+    const title = stripHtml(post?.title?.rendered) || 'Artigo Moriah';
+    const excerpt = stripHtml(post?.excerpt?.rendered).replace(/\s*\[&hellip;\]\s*$/, '');
+    const image = getPostImage(post);
+    const category = getPostCategory(post);
+    const date = formatDate(post?.date);
+    const card = document.createElement('a');
+    const safeTitle = escapeHtml(title);
+    const safeExcerpt = escapeHtml(excerpt || 'Leia o artigo completo no blog da Moriah.');
+    const safeCategory = escapeHtml(category);
+    const safeDate = escapeHtml(date);
+    const safeImage = encodeURI(image);
+
+    card.className = `blog-card${index === 0 ? ' blog-card-feat' : ''}`;
+    card.href = post.link || blogBase.href;
+    card.setAttribute('data-reveal', '');
+    if (index > 0) card.dataset.delay = String(index + 1);
+
+    const thumbClass = index === 0 ? 'blog-thumb blog-thumb-lg' : 'blog-thumb';
+    card.innerHTML = `
+      <div class="${thumbClass}">
+        ${image ? `<img src="${safeImage}" alt="${safeTitle}" loading="lazy">` : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>'}
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-cat">${safeCategory}</span><span class="blog-time">${safeDate}</span></div>
+        <h4>${safeTitle}</h4>
+        <p>${safeExcerpt}</p>
+        <span class="blog-link">Leia o artigo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    `;
+
+    return card;
+  };
+
+  if (blogGrid) {
+    fetch(postsEndpoint.href, { headers: { Accept: 'application/json' } })
+      .then(response => {
+        if (!response.ok) throw new Error('WordPress posts unavailable');
+        return response.json();
+      })
+      .then(posts => {
+        if (!Array.isArray(posts) || posts.length === 0) return;
+        blogGrid.replaceChildren(...posts.slice(0, 3).map(createPostCard));
+        if (blogAll) blogAll.href = blogBase.href;
+        blogGrid.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+      })
+      .catch(() => {
+        if (blogAll) blogAll.href = blogBase.href;
+      });
+  }
 
   // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn => {
