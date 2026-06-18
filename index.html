@@ -472,7 +472,9 @@
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
 }
-.mini-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s-5); }
+.feat-card--reverse .feat-visual { order: 2; }
+.feat-card--reverse .feat-body  { order: 1; }
+.mini-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--s-5); }
 .treat-card {
   background: var(--cream); border: var(--hairline-soft); border-radius: var(--r-lg);
   overflow: hidden; box-shadow: var(--sh-sm);
@@ -1156,6 +1158,30 @@
       </div>
     </div>
 
+    <!-- Harmonização Facial Destaque -->
+    <div class="feat-card feat-card--reverse" data-reveal>
+      <div class="feat-visual">
+        <img src="Harmonização facial/Cópia de Postar rostos (1080 x 1440 px) - 1.png" alt="Harmonização Facial" loading="lazy">
+        <div class="feat-visual-overlay"></div>
+        <div class="feat-quote">
+          "O segredo da harmonização está na leitura do rosto — cada traço tem um propósito, e cada intervenção respeita a identidade de quem está na cadeira."
+          <cite>— Dra. Mayara Fernandes</cite>
+        </div>
+      </div>
+      <div class="feat-body">
+        <span class="tag">Tratamento Facial · Harmonização</span>
+        <h3>Harmonização Facial</h3>
+        <p>Uma abordagem integradora que equilibra as proporções do rosto com precisão técnica e sensibilidade estética. Combina preenchimentos, bioremodeladores e outros recursos para resultados harmônicos, naturais e duradouros.</p>
+        <ul class="bens">
+          <li>Equilíbrio das proporções e volumes faciais</li>
+          <li>Suavização de assimetrias com naturalidade</li>
+          <li>Rejuvenescimento sem perder identidade</li>
+          <li>Planejamento personalizado por análise facial</li>
+        </ul>
+        <a href="https://wa.me/11915197330" class="btn btn-primary" target="_blank" rel="noopener">Quero minha avaliação →</a>
+      </div>
+    </div>
+
     <!-- Mini grid -->
     <div class="mini-grid">
       <!-- Ultra Face Lifting -->
@@ -1194,6 +1220,19 @@
           <span class="tag">Moriah Signature · Facial</span>
           <h3>Preenchimento Labial Signature</h3>
           <p>Uma escultura labial personalizada — técnica com cânula, anestesia, produtos premium e reavaliação em 2 meses.</p>
+          <a href="https://wa.me/11915197330" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
+        </div>
+      </div>
+      <!-- Perfiloplastia -->
+      <div class="treat-card" data-reveal data-delay="4">
+        <div class="treat-img">
+          <img src="Perfiloplastia/Cópia de Postar rostos (1080 x 1440 px) - 70.png" alt="Perfiloplastia" loading="lazy">
+          <div class="treat-img-ov"></div>
+        </div>
+        <div class="treat-body">
+          <span class="tag">Tratamento Facial</span>
+          <h3>Perfiloplastia</h3>
+          <p>Redefinição do perfil facial — nariz, mento e ângulo mandibular — por técnicas minimamente invasivas. Resultados cirúrgicos sem bisturi.</p>
           <a href="https://wa.me/11915197330" class="btn btn-outline" target="_blank" rel="noopener">Quero saber mais</a>
         </div>
       </div>
@@ -1686,9 +1725,11 @@
         <h5>Tratamentos</h5>
         <ul>
           <li><a href="#tratamentos">CrioShape Moriah</a></li>
+          <li><a href="#tratamentos">Harmonização Facial</a></li>
           <li><a href="#tratamentos">Ultra Face Lifting</a></li>
           <li><a href="#tratamentos">Toxina Botulínica</a></li>
           <li><a href="#tratamentos">Preenchimento Labial</a></li>
+          <li><a href="#tratamentos">Perfiloplastia</a></li>
         </ul>
       </div>
       <div class="footer-col">
