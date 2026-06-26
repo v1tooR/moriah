@@ -2104,14 +2104,13 @@
   // WordPress latest posts
   const blogGrid = document.querySelector('[data-wp-posts]');
   const blogAll = document.querySelector('.blog-all .btn');
-  const blogBase = new URL('blogmoriah/', window.location.href);
-  const postsEndpoint = new URL('wp-json/wp/v2/posts', blogBase);
-  postsEndpoint.search = new URLSearchParams({
+  const blogBase = window.location.origin + '/blogmoriah/';
+  const postsEndpoint = blogBase + 'wp-json/wp/v2/posts?' + new URLSearchParams({
     per_page: '3',
     _embed: '1',
     orderby: 'date',
     order: 'desc'
-  }).toString();
+  });
 
   const stripHtml = (value = '') => {
     const doc = new DOMParser().parseFromString(value, 'text/html');
@@ -2160,7 +2159,7 @@
     const safeImage = encodeURI(image);
 
     card.className = `blog-card${index === 0 ? ' blog-card-feat' : ''}`;
-    card.href = post.link || blogBase.href;
+    card.href = post.link || blogBase;
     card.setAttribute('data-reveal', '');
     if (index > 0) card.dataset.delay = String(index + 1);
 
@@ -2181,7 +2180,7 @@
   };
 
   if (blogGrid) {
-    fetch(postsEndpoint.href, { headers: { Accept: 'application/json' } })
+    fetch(postsEndpoint, { headers: { Accept: 'application/json' } })
       .then(response => {
         if (!response.ok) throw new Error('WordPress posts unavailable');
         return response.json();
@@ -2189,11 +2188,11 @@
       .then(posts => {
         if (!Array.isArray(posts) || posts.length === 0) return;
         blogGrid.replaceChildren(...posts.slice(0, 3).map(createPostCard));
-        if (blogAll) blogAll.href = blogBase.href;
+        if (blogAll) blogAll.href = blogBase;
         blogGrid.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
       })
       .catch(() => {
-        if (blogAll) blogAll.href = blogBase.href;
+        if (blogAll) blogAll.href = blogBase;
       });
   }
 
