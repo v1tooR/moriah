@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidade · Moriah Clínica</title>
+<meta name="description" content="Saiba como a Moriah Clínica coleta, usa e protege seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD).">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://moriahclinica.com.br/politica-de-privacidade.html">
+<link rel="icon" href="moriah/assets/moriah-mark.svg" type="image/svg+xml">
+<meta name="theme-color" content="#6b4c3b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="moriah/moriah-ds.css">
+<style>
+/* ============================================================
+   POLÍTICA DE PRIVACIDADE — Moriah Clínica
+   ============================================================ */
+
+/* ---- Nav ---- */
+.pp-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,245,239,.94); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(42,35,32,.07);
+}
+.pp-nav-inner {
+  max-width: 1180px; margin: 0 auto;
+  padding: 16px clamp(20px,5vw,64px);
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.pp-nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--espresso);
+}
+.pp-nav-logo { height: 22px; width: auto; color: var(--espresso); }
+.pp-nav-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-eyebrow); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3); text-decoration: none;
+  transition: color var(--dur-fast);
+}
+.pp-nav-back:hover { color: var(--marrom); }
+.pp-nav-back svg { transition: transform var(--dur-fast); }
+.pp-nav-back:hover svg { transform: translateX(-3px); }
+
+/* ---- Hero ---- */
+.pp-hero {
+  background: var(--bege-50);
+  padding: clamp(56px,8vw,100px) clamp(20px,5vw,64px) clamp(40px,5vw,64px);
+  border-bottom: 1px solid rgba(42,35,32,.08);
+  position: relative; overflow: hidden;
+}
+.pp-hero-inner { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+.pp-hero-watermark {
+  position: absolute; right: -3%; top: 50%; transform: translateY(-50%);
+  width: min(400px, 38vw); color: rgba(42,35,32,.04); pointer-events: none; z-index: 0;
+}
+.pp-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--fs-eyebrow); letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase; color: var(--bronze);
+  margin-bottom: var(--s-5);
+}
+.pp-eyebrow::before {
+  content: ''; display: block; width: 24px; height: 1px;
+  background: var(--bronze);
+}
+.pp-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300; line-height: 1.06; color: var(--ink-1);
+  margin: 0 0 var(--s-5); max-width: 18ch;
+}
+.pp-title em { font-style: italic; color: var(--marrom); }
+.pp-meta {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  font-size: var(--fs-caption); color: var(--ink-3); letter-spacing: .06em;
+}
+.pp-meta span { display: flex; align-items: center; gap: 6px; }
+
+/* ---- Layout ---- */
+.pp-layout {
+  max-width: 1180px; margin: 0 auto;
+  padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0 clamp(40px,5vw,72px);
+  align-items: start;
+}
+
+/* ---- Table of Contents ---- */
+.pp-toc {
+  position: sticky; top: 72px;
+  padding: 24px 0;
+}
+.pp-toc-title {
+  font-size: var(--fs-eyebrow); letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px;
+}
+.pp-toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.pp-toc-list a {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 6px 0; font-size: .8125rem; line-height: 1.4;
+  color: var(--ink-3); text-decoration: none;
+  border-left: 2px solid rgba(42,35,32,.08);
+  padding-left: 12px;
+  transition: color var(--dur-fast), border-color var(--dur-fast);
+}
+.pp-toc-list a:hover { color: var(--ink-2); border-color: rgba(42,35,32,.2); }
+.pp-toc-list a.active { color: var(--marrom); border-color: var(--marrom); font-weight: 500; }
+.pp-toc-num { font-size: .72rem; color: var(--bronze); font-weight: 600; flex: none; min-width: 16px; }
+
+/* ---- Content ---- */
+.pp-content { padding-top: 4px; }
+
+.pp-section {
+  padding-bottom: clamp(40px,5vw,60px);
+  margin-bottom: clamp(40px,5vw,60px);
+  border-bottom: 1px solid rgba(42,35,32,.07);
+  position: relative;
+}
+.pp-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+.pp-section-ghost {
+  position: absolute; top: -20px; right: -8px;
+  font-family: var(--font-display); font-size: clamp(5rem,10vw,8rem);
+  line-height: 1; color: rgba(122,92,79,.06); pointer-events: none;
+  user-select: none; z-index: 0;
+}
+.pp-section > *:not(.pp-section-ghost) { position: relative; z-index: 1; }
+
+.pp-section-header {
+  display: flex; align-items: flex-start; gap: 16px;
+  margin-bottom: var(--s-6);
+}
+.pp-section-num {
+  font-family: var(--font-body); font-size: .75rem; font-weight: 700;
+  letter-spacing: .16em; color: var(--bronze);
+  background: rgba(169,138,82,.1);
+  border: 1px solid rgba(169,138,82,.25);
+  border-radius: var(--r-pill);
+  padding: 4px 10px; white-space: nowrap; flex: none;
+  margin-top: 6px;
+}
+.pp-section-title {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.4rem,2.5vw,1.9rem); line-height: 1.15;
+  color: var(--ink-1); margin: 0;
+}
+
+.pp-content p {
+  color: var(--ink-2); font-size: var(--fs-body); line-height: 1.75;
+  margin: 0 0 var(--s-5);
+}
+.pp-content p:last-child { margin-bottom: 0; }
+
+.pp-content ul, .pp-content ol {
+  color: var(--ink-2); font-size: var(--fs-body); line-height: 1.7;
+  margin: 0 0 var(--s-5); padding-left: 0; list-style: none;
+}
+.pp-content li {
+  display: flex; gap: 12px; margin-bottom: 8px; align-items: flex-start;
+}
+.pp-content li::before {
+  content: '';
+  display: block; width: 5px; height: 5px;
+  border-radius: 50%; background: var(--bronze);
+  margin-top: 9px; flex: none;
+}
+.pp-content ol li::before {
+  content: counter(pp-list);
+  counter-increment: pp-list;
+  background: none; width: auto; height: auto; border-radius: 0;
+  font-weight: 600; font-size: .8125rem; color: var(--bronze); margin-top: 1px;
+}
+.pp-content ol { counter-reset: pp-list; }
+
+.pp-table {
+  width: 100%; border-collapse: collapse; margin-bottom: var(--s-5);
+  font-size: var(--fs-caption); color: var(--ink-2);
+}
+.pp-table thead th {
+  text-align: left; padding: 10px 14px;
+  font-size: var(--fs-eyebrow); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: 1px solid rgba(42,35,32,.12);
+}
+.pp-table tbody td {
+  padding: 12px 14px; border-bottom: 1px solid rgba(42,35,32,.06);
+  line-height: 1.55;
+}
+.pp-table tbody tr:last-child td { border-bottom: none; }
+.pp-table tbody tr:hover td { background: rgba(42,35,32,.02); }
+
+.pp-callout {
+  background: rgba(169,138,82,.08);
+  border-left: 3px solid var(--bronze);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: 18px 20px; margin-bottom: var(--s-5);
+  font-size: var(--fs-small); color: var(--ink-2); line-height: 1.65;
+}
+.pp-callout strong { color: var(--marrom); }
+
+.pp-rights-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px; margin-bottom: var(--s-5);
+}
+.pp-right-card {
+  background: var(--cream); border: 1px solid rgba(42,35,32,.07);
+  border-radius: var(--r-lg); padding: 18px 20px;
+}
+.pp-right-icon {
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  background: rgba(169,138,82,.1); display: grid; place-items: center;
+  margin-bottom: 10px;
+}
+.pp-right-icon svg { color: var(--bronze); width: 16px; height: 16px; }
+.pp-right-label {
+  font-size: var(--fs-caption); font-weight: 600; color: var(--ink-1);
+  margin-bottom: 4px;
+}
+.pp-right-desc { font-size: .8rem; color: var(--ink-3); line-height: 1.5; }
+
+.pp-contact-box {
+  background: var(--marrom-deep); color: var(--on-dark-1);
+  border-radius: var(--r-xl); padding: clamp(24px,3vw,36px);
+}
+.pp-contact-box h3 {
+  font-family: var(--font-display); font-weight: 300; font-size: 1.4rem;
+  color: var(--on-dark-1); margin: 0 0 var(--s-4);
+}
+.pp-contact-box p { color: var(--on-dark-2); margin: 0 0 var(--s-5); font-size: var(--fs-small); }
+.pp-contact-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.pp-contact-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-pill); padding: 9px 16px;
+  color: var(--on-dark-1); text-decoration: none; font-size: .8125rem;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.pp-contact-link:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.25); }
+
+/* ---- Footer ---- */
+.pp-footer {
+  background: var(--marrom-deep); color: var(--on-dark-3);
+  padding: var(--s-6) clamp(20px,5vw,64px);
+  text-align: center; font-size: var(--fs-caption); letter-spacing: .06em;
+}
+.pp-footer a { color: var(--on-dark-2); text-decoration: none; }
+.pp-footer a:hover { color: var(--on-dark-1); }
+.pp-footer-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 860px) {
+  .pp-layout { grid-template-columns: 1fr; }
+  .pp-toc { display: none; }
+}
+@media (max-width: 540px) {
+  .pp-rights-grid { grid-template-columns: 1fr; }
+  .pp-section-ghost { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mk" viewBox="0 0 478 792"><g transform="translate(0,792) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M490 7467 c-29 -15 -53 -77 -44 -113 12 -46 44 -56 197 -65 191 -11 313 -25 492 -59 83 -16 166 -31 186 -34 20 -4 127 -36 239 -72 302 -97 468 -172 755 -337 99 -57 399 -261 465 -316 97 -82 295 -272 308 -298 16 -30 10 -41 -73 -128 -64 -67 -228 -297 -327 -455 -74 -120 -218 -382 -218 -397 0 -6 -7 -16 -15 -23 -18 -15 -20 -14 -141 94 -115 102 -198 157 -418 279 -231 128 -347 176 -586 246 -243 70 -391 91 -651 91 -165 0 -188 -2 -201 -17 -14 -16 -16 -309 -19 -2710 l-4 -2692 23 -23 c19 -19 33 -22 102 -23 74 0 82 2 107 28 l28 27 -4 2600 -4 2599 27 12 c28 13 125 5 306 -25 85 -14 115 -21 288 -70 167 -48 415 -158 570 -254 82 -52 283 -209 445 -348 34 -30 34 -44 -4 -152 -43 -122 -81 -252 -123 -427 -20 -82 -39 -159 -42 -170 -2 -11 -14 -74 -25 -140 -46 -272 -49 -391 -49 -2067 0 -1565 0 -1578 20 -1598 40 -40 183 -20 210 29 8 15 10 329 8 1123 -6 2167 -6 2128 38 2438 26 180 117 552 161 652 30 70 34 67 146 -99 165 -243 357 -689 408 -948 49 -247 49 -257 49 -1754 -1 -1226 1 -1406 14 -1426 27 -41 165 -45 201 -5 15 16 16 126 15 1341 0 728 -5 1391 -10 1473 -16 276 -77 575 -154 771 -147 370 -276 594 -503 873 -48 61 -52 80 -23 147 25 58 157 303 218 405 101 168 280 416 345 479 41 38 54 37 89 -11 14 -18 67 -91 120 -163 309 -422 592 -1130 663 -1660 8 -66 21 -163 27 -215 7 -65 12 -618 15 -1762 l4 -1667 26 -21 c43 -33 161 -20 183 20 16 29 7 3342 -8 3465 -16 122 -39 257 -69 400 -14 66 -27 131 -30 145 -3 14 -13 52 -23 85 -10 33 -28 94 -40 135 -39 135 -93 294 -116 345 -12 28 -41 95 -64 150 -51 124 -50 123 -131 270 -129 234 -245 413 -364 560 -59 71 -85 112 -85 130 0 21 30 56 133 159 136 136 239 224 362 306 39 25 132 89 209 141 206 140 234 158 314 196 60 28 231 91 325 120 15 5 17 19 17 119 l0 113 -77 -29 c-172 -64 -417 -177 -584 -268 -154 -83 -408 -258 -509 -349 -36 -32 -103 -91 -150 -130 -47 -39 -112 -99 -145 -132 -33 -34 -66 -61 -73 -61 -8 0 -64 48 -125 108 -166 160 -370 319 -615 481 -107 70 -476 255 -598 300 -453 164 -453 164 -574 190 -158 33 -285 50 -487 66 -233 18 -320 19 -353 2z"/></g></symbol>
+  <symbol id="logo" viewBox="0 0 1272 390"><g transform="translate(0,390) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M207 3696 c-20 -21 -22 -49 -4 -64 7 -6 69 -16 137 -22 350 -30 600 -120 913 -328 100 -67 267 -214 267 -236 0 -7 -16 -28 -36 -47 -43 -41 -185 -252 -244 -364 -24 -44 -44 -82 -46 -84 -1 -1 -34 24 -73 56 -80 68 -251 168 -361 212 -155 62 -261 83 -420 85 l-145 1 0 -1360 0 -1360 50 -3 c38 -3 52 1 62 14 11 15 13 267 13 1314 l-1 1295 47 3 c99 7 313 -52 464 -128 67 -33 192 -123 288 -207 l33 -28 -30 -89 c-38 -109 -75 -263 -93 -376 -10 -65 -13 -284 -13 -940 l0 -855 26 -9 c18 -6 35 -4 55 5 l29 14 6 870 c6 926 4 897 59 1111 32 125 46 158 61 149 35 -22 134 -203 198 -362 77 -190 74 -158 80 -1013 l6 -765 47 -3 c40 -3 49 0 59 19 8 16 10 198 6 733 -4 601 -7 726 -21 806 -41 235 -128 432 -282 635 -30 40 -54 78 -54 85 0 46 215 398 286 470 l25 25 30 -35 c143 -169 284 -462 355 -740 46 -182 46 -190 51 -1112 4 -855 5 -878 24 -888 11 -7 31 -7 51 -2 l33 8 3 810 c1 490 -1 849 -8 911 -38 387 -197 793 -419 1068 -23 28 -41 56 -41 64 0 30 172 181 318 279 82 55 162 106 178 115 38 19 292 107 310 107 12 0 14 -246 14 -1671 0 -918 2 -1674 5 -1680 7 -11 75 -12 92 -1 10 6 13 361 15 1698 l3 1689 60 12 c33 7 89 14 125 15 l65 3 3 -1707 c2 -1689 2 -1707 22 -1718 22 -12 71 -3 82 14 4 6 8 794 8 1751 0 1341 -3 1744 -12 1753 -15 15 -84 15 -219 2 -215 -22 -406 -79 -629 -189 -176 -86 -324 -191 -488 -345 l-42 -40 -53 50 c-192 186 -422 328 -688 425 -194 71 -298 93 -509 105 -102 6 -118 5 -133 -10z"/><path d="M6218 3280 c-141 -25 -249 -81 -349 -180 -144 -143 -213 -317 -226 -570 -10 -211 31 -406 114 -550 54 -93 172 -207 260 -253 225 -117 552 -108 746 21 243 160 364 452 336 809 -28 363 -201 612 -489 704 -73 23 -308 35 -392 19z m266 -35 c237 -62 373 -312 393 -725 18 -386 -103 -699 -311 -800 -140 -68 -305 -57 -435 28 -147 97 -238 311 -262 615 -32 404 89 742 303 850 93 47 209 59 312 32z"/><path d="M3750 3242 c0 -32 -123 -1035 -136 -1102 -19 -107 -77 -332 -104 -402 -11 -29 -20 -54 -20 -55 0 -2 35 -3 78 -3 l77 0 1 223 c0 208 4 256 63 747 34 289 64 526 65 528 2 1 121 -335 266 -748 l263 -750 76 0 76 0 224 668 c123 367 227 670 230 674 3 4 46 -286 95 -645 48 -359 90 -662 93 -674 5 -22 9 -23 114 -23 93 0 109 2 109 16 0 9 -47 358 -105 775 -58 417 -105 764 -105 769 0 7 -29 10 -82 8 l-82 -3 -234 -693 c-130 -381 -239 -689 -243 -685 -6 6 -259 718 -476 1341 l-15 42 -114 0 c-63 0 -114 -4 -114 -8z"/><path d="M7460 2465 l0 -785 110 0 110 0 0 289 0 289 42 37 c70 59 172 105 234 105 44 0 59 -5 84 -27 21 -19 89 -141 200 -358 l168 -330 111 -3 c61 -1 111 1 111 5 -1 4 -76 159 -168 343 -161 323 -169 336 -214 366 l-47 32 33 6 c62 12 152 65 205 121 195 206 154 530 -82 644 -99 48 -128 51 -524 51 l-373 0 0 -785z m692 717 c81 -39 148 -110 180 -190 19 -48 23 -76 23 -172 0 -108 -2 -119 -31 -180 -63 -133 -127 -176 -281 -189 -115 -11 -185 -34 -274 -94 -35 -24 -70 -46 -76 -51 -10 -6 -13 88 -13 454 l0 462 203 -4 202 -3 67 -33z"/><path d="M8980 2465 l0 -785 115 0 115 0 0 785 0 785 -115 0 -115 0 0 -785z"/><path d="M9837 2483 c-168 -422 -309 -776 -313 -786 -6 -16 2 -17 107 -15 l113 3 136 340 136 340 338 0 339 0 39 -100 c48 -122 100 -321 124 -472 l18 -113 63 0 c46 0 61 3 58 13 -3 6 -144 359 -314 782 l-310 770 -113 3 -114 3 -307 -768z m829 -55 c5 -17 -14 -18 -310 -18 -204 0 -316 4 -316 10 0 5 70 186 156 401 l157 391 154 -383 c84 -211 156 -392 159 -401z"/><path d="M11310 2465 l0 -785 115 0 115 0 0 435 0 435 390 0 390 0 0 -435 0 -435 115 0 115 0 0 785 0 785 -115 0 -115 0 0 -330 0 -330 -390 0 -390 0 0 330 0 330 -115 0 -115 0 0 -785z"/></g></symbol>
+</svg>
+
+<!-- Nav -->
+<nav class="pp-nav" aria-label="Navegação">
+  <div class="pp-nav-inner">
+    <a href="index.html" class="pp-nav-brand" aria-label="Moriah Clínica — página inicial">
+      <svg class="pp-nav-logo" viewBox="0 0 1272 390" aria-hidden="true"><use href="#logo"/></svg>
+    </a>
+    <a href="index.html" class="pp-nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar ao site
+    </a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="pp-hero">
+  <svg class="pp-hero-watermark" viewBox="0 0 478 792" aria-hidden="true"><use href="#mk"/></svg>
+  <div class="pp-hero-inner">
+    <div class="pp-eyebrow">Moriah Clínica · LGPD</div>
+    <h1 class="pp-title">Política de <em>Privacidade</em></h1>
+    <div class="pp-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Última atualização: junho de 2026
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Conformidade com a LGPD (Lei nº 13.709/2018)
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- Layout -->
+<div class="pp-layout">
+
+  <!-- Table of Contents -->
+  <aside class="pp-toc" aria-label="Índice do documento">
+    <p class="pp-toc-title">Nesta página</p>
+    <ol class="pp-toc-list">
+      <li><a href="#sec-1"><span class="pp-toc-num">01</span>Sobre esta Política</a></li>
+      <li><a href="#sec-2"><span class="pp-toc-num">02</span>Dados que Coletamos</a></li>
+      <li><a href="#sec-3"><span class="pp-toc-num">03</span>Como Usamos seus Dados</a></li>
+      <li><a href="#sec-4"><span class="pp-toc-num">04</span>Base Legal (LGPD)</a></li>
+      <li><a href="#sec-5"><span class="pp-toc-num">05</span>Compartilhamento</a></li>
+      <li><a href="#sec-6"><span class="pp-toc-num">06</span>Cookies</a></li>
+      <li><a href="#sec-7"><span class="pp-toc-num">07</span>Seus Direitos</a></li>
+      <li><a href="#sec-8"><span class="pp-toc-num">08</span>Segurança dos Dados</a></li>
+      <li><a href="#sec-9"><span class="pp-toc-num">09</span>Retenção de Dados</a></li>
+      <li><a href="#sec-10"><span class="pp-toc-num">10</span>Alterações nesta Política</a></li>
+      <li><a href="#sec-11"><span class="pp-toc-num">11</span>Contato e DPO</a></li>
+    </ol>
+  </aside>
+
+  <!-- Content -->
+  <main class="pp-content" id="main-content">
+
+    <!-- 01 -->
+    <section class="pp-section" id="sec-1">
+      <span class="pp-section-ghost" aria-hidden="true">01</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">01</span>
+        <h2 class="pp-section-title">Sobre esta Política de Privacidade</h2>
+      </div>
+      <p>A <strong>Moriah Clínica</strong>, sob responsabilidade da Dra. Mayara Fernandes, comprometida com a proteção dos seus dados pessoais e com a transparência no tratamento das informações que nos são confiadas.</p>
+      <p>Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos seus dados pessoais quando você visita nosso site (<a href="https://moriahclinica.com.br" style="color:var(--marrom)">moriahclinica.com.br</a>), utiliza nossos serviços ou entra em contato conosco por qualquer canal.</p>
+      <div class="pp-callout">
+        <strong>Ao utilizar nosso site ou serviços, você confirma que leu e compreendeu esta política.</strong> Caso tenha dúvidas, entre em contato conosco antes de prosseguir.
+      </div>
+      <p>Esta política está em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD) — Lei nº 13.709/2018</strong> e demais legislações aplicáveis.</p>
+    </section>
+
+    <!-- 02 -->
+    <section class="pp-section" id="sec-2">
+      <span class="pp-section-ghost" aria-hidden="true">02</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">02</span>
+        <h2 class="pp-section-title">Dados que Coletamos</h2>
+      </div>
+      <p>Coletamos apenas os dados estritamente necessários para prestar nossos serviços com excelência.</p>
+      <table class="pp-table">
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Dados coletados</th>
+            <th>Origem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Identificação</strong></td>
+            <td>Nome completo, e-mail, telefone/WhatsApp</td>
+            <td>Formulários, mensagens diretas</td>
+          </tr>
+          <tr>
+            <td><strong>Saúde</strong></td>
+            <td>Histórico estético, condições de saúde relevantes (somente para fins de avaliação clínica)</td>
+            <td>Formulário de anamnese, consulta presencial</td>
+          </tr>
+          <tr>
+            <td><strong>Navegação</strong></td>
+            <td>Endereço IP, páginas visitadas, duração da sessão, tipo de dispositivo</td>
+            <td>Cookies, logs de servidor</td>
+          </tr>
+          <tr>
+            <td><strong>Comunicação</strong></td>
+            <td>Conteúdo de mensagens enviadas por WhatsApp, formulário ou e-mail</td>
+            <td>Contato direto com a clínica</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Dados sensíveis:</strong> os dados de saúde coletados durante a anamnese são considerados dados sensíveis conforme o art. 5º, II, da LGPD, e recebem tratamento com camada adicional de proteção e sigilo.</p>
+    </section>
+
+    <!-- 03 -->
+    <section class="pp-section" id="sec-3">
+      <span class="pp-section-ghost" aria-hidden="true">03</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">03</span>
+        <h2 class="pp-section-title">Como Usamos seus Dados</h2>
+      </div>
+      <p>Utilizamos seus dados pessoais exclusivamente para as seguintes finalidades:</p>
+      <ul>
+        <li>Agendamento de avaliações e sessões de tratamento</li>
+        <li>Comunicação sobre seus agendamentos, resultados e orientações pós-procedimento</li>
+        <li>Elaboração de protocolos de tratamento personalizados</li>
+        <li>Envio de conteúdo informativo sobre saúde e estética (com seu consentimento)</li>
+        <li>Melhoria contínua do nosso site e da experiência do usuário</li>
+        <li>Cumprimento de obrigações legais e regulatórias</li>
+        <li>Análise de desempenho do site por meio de ferramentas de analytics</li>
+      </ul>
+      <p>Não utilizamos seus dados para decisões automatizadas que produzam efeitos jurídicos ou que afetem significativamente seus interesses.</p>
+    </section>
+
+    <!-- 04 -->
+    <section class="pp-section" id="sec-4">
+      <span class="pp-section-ghost" aria-hidden="true">04</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">04</span>
+        <h2 class="pp-section-title">Base Legal (LGPD)</h2>
+      </div>
+      <p>Todo tratamento de dados pessoais realizado pela Moriah Clínica possui respaldo em ao menos uma das bases legais previstas nos arts. 7º e 11 da LGPD:</p>
+      <ul>
+        <li><strong>Consentimento</strong> — para envio de comunicações de marketing, newsletter e conteúdo promocional (art. 7º, I)</li>
+        <li><strong>Execução de contrato</strong> — para agendamentos, atendimento e prestação dos serviços contratados (art. 7º, V)</li>
+        <li><strong>Obrigação legal</strong> — para cumprimento de exigências fiscais, de prontuário e regulatórias (art. 7º, II)</li>
+        <li><strong>Tutela da saúde</strong> — para dados de saúde utilizados na anamnese e planejamento de tratamentos, por profissional de saúde habilitado (art. 11, II, f)</li>
+        <li><strong>Legítimo interesse</strong> — para análise de desempenho do site e melhoria dos serviços, respeitado o interesse e direitos do titular (art. 7º, IX)</li>
+      </ul>
+    </section>
+
+    <!-- 05 -->
+    <section class="pp-section" id="sec-5">
+      <span class="pp-section-ghost" aria-hidden="true">05</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">05</span>
+        <h2 class="pp-section-title">Compartilhamento de Dados</h2>
+      </div>
+      <p>A Moriah Clínica <strong>não vende, aluga ou comercializa</strong> seus dados pessoais com terceiros. Podemos compartilhar informações apenas nas seguintes situações:</p>
+      <ul>
+        <li><strong>Provedores de serviços tecnológicos:</strong> plataformas de agendamento, hospedagem de site e ferramentas de e-mail que nos auxiliam na operação (sempre sob obrigações de confidencialidade)</li>
+        <li><strong>Plataformas de analytics:</strong> Google Analytics e similares, para análise de tráfego do site (dados anonimizados ou pseudonimizados)</li>
+        <li><strong>Obrigação legal:</strong> quando exigido por autoridade competente, ordem judicial ou lei</li>
+        <li><strong>Proteção de direitos:</strong> quando necessário para exercer ou defender nossos direitos legais</li>
+      </ul>
+      <p>Todo compartilhamento é realizado com as salvaguardas adequadas e limitado ao mínimo necessário.</p>
+    </section>
+
+    <!-- 06 -->
+    <section class="pp-section" id="sec-6">
+      <span class="pp-section-ghost" aria-hidden="true">06</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">06</span>
+        <h2 class="pp-section-title">Cookies e Tecnologias de Rastreamento</h2>
+      </div>
+      <p>Nosso site utiliza cookies — pequenos arquivos de texto salvos no seu dispositivo — para melhorar a experiência de navegação. Os tipos de cookies que utilizamos:</p>
+      <table class="pp-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Finalidade</th>
+            <th>Base legal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Essenciais</strong></td>
+            <td>Funcionamento básico do site, segurança e preferências de navegação</td>
+            <td>Legítimo interesse</td>
+          </tr>
+          <tr>
+            <td><strong>Analytics</strong></td>
+            <td>Análise de tráfego e comportamento de usuário (Google Analytics)</td>
+            <td>Consentimento</td>
+          </tr>
+          <tr>
+            <td><strong>Marketing</strong></td>
+            <td>Personalização de conteúdo e anúncios (Meta Pixel, Google Ads)</td>
+            <td>Consentimento</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Você pode gerenciar suas preferências de cookies a qualquer momento através do banner de consentimento ou das configurações do seu navegador. A desativação de cookies não essenciais não impede o uso do site.</p>
+    </section>
+
+    <!-- 07 -->
+    <section class="pp-section" id="sec-7">
+      <span class="pp-section-ghost" aria-hidden="true">07</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">07</span>
+        <h2 class="pp-section-title">Seus Direitos como Titular de Dados</h2>
+      </div>
+      <p>A LGPD garante a você, como titular dos dados, os seguintes direitos (art. 18), que podem ser exercidos a qualquer momento entrando em contato conosco:</p>
+      <div class="pp-rights-grid">
+        <div class="pp-right-card">
+          <div class="pp-right-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </div>
+          <div class="pp-right-label">Confirmação e Acesso</div>
+          <div class="pp-right-desc">Saber se tratamos seus dados e acessar cópia das informações que temos sobre você</div>
+        </div>
+        <div class="pp-right-card">
+          <div class="pp-right-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="pp-right-label">Correção</div>
+          <div class="pp-right-desc">Solicitar atualização ou retificação de dados incompletos, inexatos ou desatualizados</div>
+        </div>
+        <div class="pp-right-card">
+          <div class="pp-right-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+          </div>
+          <div class="pp-right-label">Eliminação</div>
+          <div class="pp-right-desc">Solicitar a exclusão de dados desnecessários, excessivos ou tratados sem base legal</div>
+        </div>
+        <div class="pp-right-card">
+          <div class="pp-right-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="pp-right-label">Portabilidade</div>
+          <div class="pp-right-desc">Solicitar a transferência de seus dados a outro fornecedor de serviço, em formato interoperável</div>
+        </div>
+        <div class="pp-right-card">
+          <div class="pp-right-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="pp-right-label">Revogação do Consentimento</div>
+          <div class="pp-right-desc">Retirar o consentimento dado para tratamento de dados a qualquer momento, sem ônus</div>
+        </div>
+        <div class="pp-right-card">
+          <div class="pp-right-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="pp-right-label">Oposição</div>
+          <div class="pp-right-desc">Se opor ao tratamento realizado com base no legítimo interesse, quando em desacordo</div>
+        </div>
+      </div>
+      <p>Responderemos às solicitações em até <strong>15 dias corridos</strong>. Em casos de maior complexidade, este prazo pode ser prorrogado por mais 15 dias, com informação prévia.</p>
+    </section>
+
+    <!-- 08 -->
+    <section class="pp-section" id="sec-8">
+      <span class="pp-section-ghost" aria-hidden="true">08</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">08</span>
+        <h2 class="pp-section-title">Segurança dos Dados</h2>
+      </div>
+      <p>Adotamos medidas técnicas e organizacionais para proteger seus dados pessoais contra acessos não autorizados, alteração, divulgação ou destruição:</p>
+      <ul>
+        <li>Transmissão de dados via HTTPS com certificado SSL/TLS</li>
+        <li>Acesso restrito a dados sensíveis somente a profissionais autorizados</li>
+        <li>Armazenamento em servidores com proteção contra acesso não autorizado</li>
+        <li>Revisão periódica das práticas de segurança</li>
+        <li>Treinamento da equipe em proteção de dados e sigilo profissional</li>
+      </ul>
+      <div class="pp-callout">
+        Nenhum sistema de transmissão de dados pela internet é 100% seguro. Em caso de incidente de segurança que possa acarretar risco relevante aos titulares, comunicaremos a Autoridade Nacional de Proteção de Dados (ANPD) e os titulares afetados nos prazos legais.
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="pp-section" id="sec-9">
+      <span class="pp-section-ghost" aria-hidden="true">09</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">09</span>
+        <h2 class="pp-section-title">Retenção de Dados</h2>
+      </div>
+      <p>Mantemos seus dados pessoais pelo tempo necessário para cumprir as finalidades descritas nesta política, observados os seguintes critérios:</p>
+      <ul>
+        <li><strong>Prontuários e dados de saúde:</strong> mínimo de 5 anos após o último atendimento, conforme normas do Conselho Federal de Medicina e regulamentações sanitárias</li>
+        <li><strong>Dados fiscais e contábeis:</strong> 5 anos, conforme Código Tributário Nacional</li>
+        <li><strong>Cookies de analytics:</strong> até 13 meses (configuração padrão do Google Analytics)</li>
+        <li><strong>Comunicações de marketing:</strong> enquanto mantiver seu consentimento ativo ou até solicitação de exclusão</li>
+        <li><strong>Dados de contato (sem agendamento):</strong> até 2 anos após o último contato</li>
+      </ul>
+      <p>Após o término do período de retenção, os dados são eliminados de forma segura ou anonimizados.</p>
+    </section>
+
+    <!-- 10 -->
+    <section class="pp-section" id="sec-10">
+      <span class="pp-section-ghost" aria-hidden="true">10</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">10</span>
+        <h2 class="pp-section-title">Alterações nesta Política</h2>
+      </div>
+      <p>Esta política pode ser atualizada periodicamente para refletir mudanças em nossas práticas, na legislação ou nos serviços oferecidos. Quando houver alterações relevantes, notificaremos você por meio de:</p>
+      <ul>
+        <li>Aviso visível no site com a data de atualização</li>
+        <li>E-mail, caso tenhamos seu contato e a mudança afete significativamente seus direitos</li>
+      </ul>
+      <p>Recomendamos que você revisite esta página periodicamente. A data da última atualização está sempre indicada no cabeçalho.</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="pp-section" id="sec-11">
+      <span class="pp-section-ghost" aria-hidden="true">11</span>
+      <div class="pp-section-header">
+        <span class="pp-section-num">11</span>
+        <h2 class="pp-section-title">Contato e Encarregado de Dados (DPO)</h2>
+      </div>
+      <p>Para exercer seus direitos, esclarecer dúvidas sobre esta política ou registrar uma solicitação relacionada aos seus dados pessoais, entre em contato com nossa equipe:</p>
+      <div class="pp-contact-box">
+        <h3>Moriah Clínica · Encarregado de Dados</h3>
+        <p>Respondemos a todas as solicitações em até 15 dias corridos. Dados identificadores básicos podem ser solicitados para confirmar sua identidade antes do atendimento.</p>
+        <div class="pp-contact-row">
+          <a href="mailto:contato@moriahclinica.com.br" class="pp-contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            contato@moriahclinica.com.br
+          </a>
+          <a href="https://wa.me/5511915197330" class="pp-contact-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp · São Paulo
+          </a>
+        </div>
+      </div>
+      <p style="margin-top:var(--s-5); font-size:var(--fs-small); color:var(--ink-3);">Caso não esteja satisfeito com a resposta, você também pode contatar a <strong>Autoridade Nacional de Proteção de Dados (ANPD)</strong> pelo site <a href="https://www.gov.br/anpd" target="_blank" rel="noopener" style="color:var(--marrom)">gov.br/anpd</a>.</p>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="pp-footer">
+  <div class="pp-footer-inner">
+    <span>© 2026 Moriah Clínica · Todos os direitos reservados</span>
+    <a href="index.html">Voltar ao site</a>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // Active ToC on scroll
+  const sections = document.querySelectorAll('.pp-section[id]');
+  const tocLinks = document.querySelectorAll('.pp-toc-list a');
+
+  if (!tocLinks.length) return;
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.pp-toc-list a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+
+  // Smooth scroll for ToC links
+  tocLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
+</body>
+</html>

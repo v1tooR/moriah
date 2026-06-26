@@ -1141,6 +1141,59 @@
   .h-seal b { font-size: 1.45rem; }
   .h-seal span { font-size: .78rem; line-height: 1.25; }
 }
+
+/* ---- Cookie Banner ---- */
+.cookie-banner {
+  position: fixed; bottom: 28px; left: 28px; z-index: 9900;
+  max-width: 420px; width: calc(100vw - 56px);
+  background: var(--cream);
+  border-radius: var(--r-xl);
+  box-shadow: 0 24px 64px -12px rgba(42,35,32,.28), 0 0 0 1px rgba(42,35,32,.07);
+  padding: 22px 22px 20px;
+  transform: translateY(calc(100% + 48px));
+  opacity: 0;
+  transition: transform .55s cubic-bezier(.2,.7,.2,1), opacity .55s;
+  pointer-events: none;
+}
+.cookie-banner.cb-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.cookie-inner { display: flex; gap: 14px; align-items: flex-start; }
+.cookie-mk { width: 28px; height: auto; color: var(--marrom); opacity: .3; flex: none; margin-top: 2px; }
+.cookie-body { flex: 1; min-width: 0; }
+.cookie-title {
+  font-family: var(--font-display); font-size: .9375rem; font-weight: 400;
+  color: var(--ink-1); margin: 0 0 6px;
+}
+.cookie-text {
+  font-size: .8125rem; color: var(--ink-2); line-height: 1.62; margin: 0 0 14px;
+}
+.cookie-text a { color: var(--marrom); text-underline-offset: 2px; }
+.cookie-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.cookie-accept {
+  background: var(--bronze-metal); color: var(--espresso);
+  border: none; border-radius: var(--r-pill);
+  padding: 9px 18px; font-family: var(--font-body); font-size: .8125rem;
+  font-weight: 600; letter-spacing: .04em; cursor: pointer;
+  box-shadow: 0 6px 20px -8px rgba(169,138,82,.45);
+  transition: transform var(--dur-fast), box-shadow var(--dur-fast);
+}
+.cookie-accept:hover { transform: translateY(-1px); box-shadow: 0 10px 28px -8px rgba(169,138,82,.6); }
+.cookie-essential {
+  background: none; border: var(--hairline); border-radius: var(--r-pill);
+  padding: 9px 14px; font-family: var(--font-body); font-size: .8125rem;
+  color: var(--ink-3); cursor: pointer;
+  transition: color var(--dur-fast), border-color var(--dur-fast);
+}
+.cookie-essential:hover { color: var(--ink-1); border-color: rgba(42,35,32,.25); }
+@media (max-width: 520px) {
+  .cookie-banner { left: 12px; right: 12px; bottom: 12px; width: auto; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner { transition: opacity .3s; transform: none; }
+}
 </style>
 </head>
 <body>
@@ -2026,6 +2079,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Moriah Clínica. Todos os direitos reservados.</span>
+      <a href="politica-de-privacidade.html" style="color:var(--on-dark-3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--on-dark-1)'" onmouseout="this.style.color='var(--on-dark-3)'">Política de Privacidade</a>
     </div>
   </div>
 </footer>
@@ -2217,7 +2271,42 @@
       }
     });
   });
+
+
+  // Cookie consent
+  const cookieBanner = document.getElementById('cookieBanner');
+  const cookieKey = 'moriah_cookie_consent';
+
+  function dismissCookies(value) {
+    localStorage.setItem(cookieKey, value);
+    cookieBanner.classList.remove('cb-visible');
+    setTimeout(() => { cookieBanner.hidden = true; }, 560);
+  }
+
+  if (cookieBanner && !localStorage.getItem(cookieKey)) {
+    cookieBanner.hidden = false;
+    setTimeout(() => cookieBanner.classList.add('cb-visible'), 900);
+    document.getElementById('cookieAccept').addEventListener('click', () => dismissCookies('all'));
+    document.getElementById('cookieEssential').addEventListener('click', () => dismissCookies('essential'));
+  }
+
 })();
 </script>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner" hidden aria-live="polite" role="region" aria-label="Aviso de cookies">
+  <div class="cookie-inner">
+    <svg class="cookie-mk" viewBox="0 0 478 792" aria-hidden="true"><use href="#mk"/></svg>
+    <div class="cookie-body">
+      <p class="cookie-title">Sua privacidade importa</p>
+      <p class="cookie-text">Usamos cookies para melhorar sua experiência e personalizar conteúdo. Saiba mais na nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+      <div class="cookie-actions">
+        <button class="cookie-accept" id="cookieAccept">Aceitar todos</button>
+        <button class="cookie-essential" id="cookieEssential">Apenas essenciais</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
