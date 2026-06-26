@@ -1,0 +1,38 @@
+
+ 
+selector .elementor-post__read-more {
+    padding: 8px 24px;
+    
+    background: #4A3830;
+    border-radius: 4px;
+    color: #FFF;
+}
+
+
+selector .elementor-post__read-more:hover {
+    color: #FFF !important;
+    background: linear-gradient(90deg, #4A3830 0%, #4A3830 100%) !important;
+}
+selector .elementor-post__card {
+    box-shadow: 0px 15px 60px 5px rgba(56, 24, 2, 0.08);
+}
+
+selector .elementor-post__card:hover {
+    box-shadow: 0px 30px 60px 5px rgba(56, 24, 2, 0.08);
+}
+
+selector h3, selector h3 a {
+    font-size: 18px !important;
+    line-height: 120% !important;
+    display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden !important;
+}
+
+selector .elementor-post__excerpt p {
+    display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden !important;
+}

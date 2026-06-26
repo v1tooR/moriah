@@ -1,0 +1,29 @@
+<?php
+
+namespace Hostinger\AiAssistant\Providers;
+
+use Hostinger\AiAssistant\Container;
+use Hostinger\AiAssistant\Nudges\DomainNudge;
+use Hostinger\AiAssistant\Nudges\NudgeManager;
+use Hostinger\AiAssistant\Nudges\RenewalNudge;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    die;
+}
+
+/**
+ * Wires the proactive Kodee nudges.
+ *
+ * To add a new nudge (e.g. domain renewal): create a class implementing
+ * NudgeInterface (usually extending AbstractNudge) and register it below.
+ */
+class NudgesProvider implements ProviderInterface {
+    public function register( Container $container ): void {
+        $manager = $container->get( NudgeManager::class );
+
+        $manager->register( $container->get( RenewalNudge::class ) );
+        $manager->register( $container->get( DomainNudge::class ) );
+
+        $manager->init();
+    }
+}
