@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://moriahclinica.com.br/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://moriahclinica.com.br/compartilhamento.webp</image:loc>
+      <image:title>Moriah Clínica — Harmonização Facial e Estética Avançada · Dra. Mayara Fernandes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://moriahclinica.com.br/webp/dra-mayara-hero.webp</image:loc>
+      <image:title>Dra. Mayara Fernandes — especialista em harmonização facial em São Paulo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://moriahclinica.com.br/blogmoriah/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Link in Bio -->
+  <url>
+    <loc>https://moriahclinic.com.br/bio.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Política de Privacidade -->
+  <url>
+    <loc>https://moriahclinica.com.br/politica-de-privacidade.html</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+</urlset>

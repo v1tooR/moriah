@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /blogmoriah/wp-admin/
+Disallow: /blogmoriah/wp-login.php
+Disallow: /blogmoriah/wp-json/
+Disallow: /blogmoriah/xmlrpc.php
+Disallow: /blogmoriah/?s=
+
+# Sitemap
+Sitemap: https://moriahclinica.com.br/sitemap.xml

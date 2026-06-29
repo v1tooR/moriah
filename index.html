@@ -5,13 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- ── Primary SEO ─────────────────────────────────────────── -->
-<title>Moriah Clínica · Harmonização Facial e Estética Avançada — Dra. Mayara Fernandes</title>
-<meta name="description" content="Harmonização facial, CrioShape, Perfiloplastia e protocolos estéticos exclusivos pela Dra. Mayara Fernandes. Unidades em São Paulo (Vila Olímpia) e São José dos Campos. Faça sua avaliação.">
-<meta name="keywords" content="harmonização facial, perfiloplastia, CrioShape, criolipólise, Ultra Face Lifting, toxina botulínica, preenchimento labial, estética avançada, clínica estética São Paulo, clínica estética Vila Olímpia, clínica estética São José dos Campos, Dra. Mayara Fernandes, remodelação corporal, rejuvenescimento facial">
+<title>Moriah Clínica · Harmonização Facial e Estética Avançada em SP</title>
+<meta name="description" content="Harmonização facial, CrioShape e estética avançada em São Paulo (Vila Olímpia) e São José dos Campos. Protocolos exclusivos pela Dra. Mayara Fernandes. Avalie gratuitamente.">
+<meta name="keywords" content="harmonização facial São Paulo, harmonização facial Vila Olímpia, CrioShape, criolipólise, perfiloplastia, Ultra Face Lifting, toxina botulínica, preenchimento labial, estética avançada São Paulo, clínica estética Vila Olímpia, clínica estética São José dos Campos, Dra. Mayara Fernandes, remodelação corporal, rejuvenescimento facial">
 <meta name="author" content="Dra. Mayara Fernandes — Moriah Clínica">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#6b4c3b">
 <link rel="canonical" href="https://moriahclinica.com.br/">
+<link rel="alternate" hreflang="pt-BR" href="https://moriahclinica.com.br/">
+
+<!-- ── Geo / Local SEO ───────────────────────────────────── -->
+<meta name="geo.region" content="BR-SP">
+<meta name="geo.placename" content="São Paulo, Brasil">
+<meta name="geo.position" content="-23.5948;-46.6858">
+<meta name="ICBM" content="-23.5948, -46.6858">
 
 <!-- ── Favicon ─────────────────────────────────────────────── -->
 <link rel="icon" href="moriah/assets/moriah-mark.svg" type="image/svg+xml">
@@ -25,7 +32,7 @@
 <meta property="og:site_name" content="Moriah Clínica">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Moriah Clínica · Harmonização Facial e Estética Avançada">
-<meta property="og:description" content="Harmonização facial, CrioShape, Perfiloplastia e protocolos estéticos pela Dra. Mayara Fernandes. Faça sua avaliação em SP e São José dos Campos.">
+<meta property="og:description" content="Harmonização facial, CrioShape e estética avançada em São Paulo (Vila Olímpia) e São José dos Campos. Protocolos exclusivos pela Dra. Mayara Fernandes. Avalie gratuitamente.">
 <meta property="og:image" content="https://moriahclinic.com.br/compartilhamento.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -42,6 +49,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://unpkg.com">
+<link rel="preload" as="image" href="webp/dra-mayara-hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Libre+Caslon+Display&display=swap">
 
 <!-- ── JSON-LD Structured Data ───────────────────────────── -->
 <script type="application/ld+json">
@@ -49,18 +58,27 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "MedicalClinic",
+      "@type": ["MedicalClinic", "LocalBusiness"],
       "@id": "https://moriahclinica.com.br/#organization",
       "name": "Moriah Clínica",
-      "alternateName": "Moriah Clínica Estética",
+      "alternateName": ["Moriah Clinic", "Moriah Clínica Estética"],
       "description": "Clínica de estética avançada especializada em harmonização facial, remodelação corporal e protocolos autorais pela Dra. Mayara Fernandes.",
       "url": "https://moriahclinica.com.br",
-      "logo": "https://moriahclinica.com.br/moriah/assets/moriah-logo.svg",
-      "image": "https://moriahclinic.com.br/compartilhamento.webp",
+      "telephone": "+55-11-91519-7330",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://moriahclinica.com.br/moriah/assets/moriah-logo.svg",
+        "width": 400, "height": 120
+      },
+      "image": "https://moriahclinica.com.br/compartilhamento.webp",
       "priceRange": "$$",
       "currenciesAccepted": "BRL",
       "paymentAccepted": "Dinheiro, Cartão de Crédito, Cartão de Débito, Pix",
-      "medicalSpecialty": "Cosmetology",
+      "medicalSpecialty": ["Cosmetology", "Dermatology"],
+      "areaServed": [
+        {"@type": "City", "name": "São Paulo", "addressRegion": "SP"},
+        {"@type": "City", "name": "São José dos Campos", "addressRegion": "SP"}
+      ],
       "sameAs": [
         "https://www.instagram.com/moriahclinic_/",
         "https://www.facebook.com/mfbeatycenter"
@@ -127,8 +145,23 @@
       "inLanguage": "pt-BR",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {"@type": "EntryPoint", "urlTemplate": "https://moriahclinica.com.br/blog/?s={search_term_string}"},
+        "target": {"@type": "EntryPoint", "urlTemplate": "https://moriahclinica.com.br/blogmoriah/?s={search_term_string}"},
         "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://moriahclinica.com.br/#webpage",
+      "url": "https://moriahclinica.com.br",
+      "name": "Moriah Clínica · Harmonização Facial e Estética Avançada em SP",
+      "description": "Harmonização facial, CrioShape e estética avançada em São Paulo (Vila Olímpia) e São José dos Campos. Protocolos exclusivos pela Dra. Mayara Fernandes. Avalie gratuitamente.",
+      "isPartOf": {"@id": "https://moriahclinica.com.br/#website"},
+      "about": {"@id": "https://moriahclinica.com.br/#organization"},
+      "primaryImageOfPage": {"@type": "ImageObject", "url": "https://moriahclinica.com.br/compartilhamento.webp"},
+      "inLanguage": "pt-BR",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Início", "item": "https://moriahclinica.com.br"}]
       }
     },
     {
@@ -1291,7 +1324,7 @@
     <div class="hero-compare">
       <div class="compare-photo">
         <img src="webp/labial-compare.webp"
-             alt="Resultado preenchimento labial">
+             alt="Resultado antes e depois de preenchimento labial Moriah Clínica — 1 sessão" loading="lazy" width="480" height="600">
         <div class="compare-timeline">
           <span class="compare-tl-before">Antes</span>
           <span class="compare-tl-sep"></span>
@@ -1313,7 +1346,7 @@
 
     <!-- Foto da Dra. Mayara como bloco contido -->
     <div class="hero-photo-block">
-      <img src="webp/dra-mayara-hero.webp" alt="Dra. Mayara Fernandes" loading="eager">
+      <img src="webp/dra-mayara-hero.webp" alt="Dra. Mayara Fernandes — especialista em harmonização facial e estética avançada em São Paulo" loading="eager" fetchpriority="high" width="600" height="800">
     </div>
   </div>
 </section>
