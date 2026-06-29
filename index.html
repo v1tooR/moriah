@@ -703,7 +703,11 @@
 .treat-body .btn { width: 100%; justify-content: center; padding: 12px 20px; font-size: var(--fs-eyebrow); }
 @media (max-width: 900px) {
   .feat-card { grid-template-columns: 1fr; }
-  .feat-visual { aspect-ratio: 16/9; }
+  .feat-visual { aspect-ratio: 4/3; }
+  .feat-visual-overlay,
+  .feat-quote { display: none; }
+  .feat-card--reverse .feat-visual { order: 1; }
+  .feat-card--reverse .feat-body { order: 2; }
   .mini-grid { grid-template-columns: 1fr; }
 }
 
